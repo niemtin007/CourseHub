@@ -1,0 +1,17 @@
+export const groupItems = [
+  { label: "Group 01", value: "GP01" },
+  { label: "Group 02", value: "GP02" },
+  { label: "Group 03", value: "GP03" },
+  { label: "Group 04", value: "GP04" },
+  { label: "Group 05", value: "GP05" },
+  { label: "Group 06", value: "GP06" },
+  { label: "Group 07", value: "GP07" },
+  { label: "Group 08", value: "GP08" },
+  { label: "Group 09", value: "GP09" },
+  { label: "Group 10", value: "GP10" },
+  { label: "Group 11", value: "GP11" },
+  { label: "Group 12", value: "GP12" },
+  { label: "Group 13", value: "GP13" },
+  { label: "Group 14", value: "GP14" },
+  { label: "Group 15", value: "GP15" },
+];

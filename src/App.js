@@ -1,26 +1,96 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actions from "./store/actions";
 
-function App() {
+import UserLayout from "./hoc/Layout/UserLayout";
+
+import Dashboard from "./containers/Dashboard/Dashboard";
+import Courses from "./containers/Courses/Courses";
+import Auth from "./containers/Auth/Auth";
+import CourseDetail from "./components/CourseList/CourseDetail/CourseDetail";
+import Logout from "./containers/Auth/Logout/Logout";
+import UsersManager from "./containers/UsersManager/UsersManager";
+import CoursesManager from "./containers/CoursesManager/CoursesManager";
+import PageNotFound from "./containers/PageNotFound/PageNotFound";
+
+const RouteUser = ({ Component, ...props }) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Route
+      {...props}
+      render={() => (
+        <UserLayout>
+          <Component />
+        </UserLayout>
+      )}
+    />
   );
-}
+};
 
-export default App;
+const RouteAdmin = ({ Component, isAdmin, ...props }) => {
+  if (isAdmin) {
+    return (
+      <Route
+        {...props}
+        render={() => (
+          <UserLayout>
+            <Component />
+          </UserLayout>
+        )}
+      />
+    );
+  } else {
+    return <Route {...props} render={() => <PageNotFound />} />;
+  }
+};
+
+const App = ({ onTryAutoSignup }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const isAdmin = user && user.maLoaiNguoiDung === "GV";
+
+  useEffect(() => {
+    onTryAutoSignup();
+  }, [onTryAutoSignup]);
+
+  return (
+    <Fragment>
+      <Switch>
+        {/* With Layout */}
+        <RouteUser path="/" exact Component={Dashboard} />
+        <RouteUser path="/courses" exact Component={Courses} />
+        <RouteUser path="/courses/:id" Component={CourseDetail} />
+        <RouteUser path="/logout" Component={Logout} />
+        <RouteAdmin
+          path="/users-management"
+          Component={UsersManager}
+          isAdmin={isAdmin}
+        />
+        <RouteAdmin
+          path="/courses-management"
+          Component={CoursesManager}
+          isAdmin={isAdmin}
+        />
+        {/* Without Layout */}
+        <RouteUser path="/sign-in" component={Auth} />
+        <RouteUser path="/sign-up" component={Auth} />
+
+        {/* Page Not Found */}
+        <Route path="" component={PageNotFound} />
+      </Switch>
+    </Fragment>
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.token !== null,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTryAutoSignup: () => dispatch(actions.authCheckState()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
