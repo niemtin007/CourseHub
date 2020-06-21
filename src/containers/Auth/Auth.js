@@ -94,6 +94,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "3rem",
     border: "none",
+    borderRadius: "3px",
     background: "linear-gradient(120deg, #2980b9, #8e44ad, #2980b9)",
     backgroundSize: "200%",
     color: "#fff",
@@ -146,7 +147,7 @@ export const Auth = (props) => {
   const classes = useStyles();
   const { error, success } = props;
   const { onAuth, onMessageReset, history, match } = props;
-  const isSignUp = match.url === "/sign-up";
+  const isSignUp = match && match.url === "/sign-up";
 
   const { enqueueSnackbar } = useSnackbar();
 
@@ -276,6 +277,7 @@ export const Auth = (props) => {
                 ? "Sign Up"
                 : "Login"}
             </Typography>
+
             <Box
               mt={isSignUp ? 5 : 10}
               mb={isSignUp ? 5 : 0}

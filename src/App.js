@@ -28,20 +28,20 @@ const RouteUser = ({ Component, ...props }) => {
 };
 
 const RouteAdmin = ({ Component, isAdmin, ...props }) => {
-  if (isAdmin) {
-    return (
-      <Route
-        {...props}
-        render={() => (
+  return (
+    <Route
+      {...props}
+      render={() =>
+        isAdmin ? (
           <UserLayout>
             <Component />
           </UserLayout>
-        )}
-      />
-    );
-  } else {
-    return <Route {...props} render={() => <PageNotFound />} />;
-  }
+        ) : (
+          <PageNotFound />
+        )
+      }
+    />
+  );
 };
 
 const App = ({ onTryAutoSignup }) => {
@@ -71,8 +71,8 @@ const App = ({ onTryAutoSignup }) => {
           isAdmin={isAdmin}
         />
         {/* Without Layout */}
-        <RouteUser path="/sign-in" component={Auth} />
-        <RouteUser path="/sign-up" component={Auth} />
+        <Route path="/sign-in" component={Auth} />
+        <Route path="/sign-up" component={Auth} />
 
         {/* Page Not Found */}
         <Route path="" component={PageNotFound} />

@@ -78,23 +78,25 @@ export const fetchUserListInThisCourse = (courseId) => {
   return (dispatch) => {
     dispatch(fetchUserListInThisCourseStart());
     const user = JSON.parse(localStorage.getItem("user"));
-    let config = {
-      method: "get",
-      url: `/QuanLyKhoaHoc/LayThongTinHocVienKhoaHoc?maKhoaHoc=${courseId}`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-    };
+    if (user && user.accessToken) {
+      let config = {
+        method: "get",
+        url: `/QuanLyKhoaHoc/LayThongTinHocVienKhoaHoc?maKhoaHoc=${courseId}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      };
 
-    axios(config)
-      .then((response) => {
-        // console.log(response.data);
-        dispatch(fetchUserListInThisCourseSuccess(response.data));
-      })
-      .catch((error) => {
-        // console.log(error);
-        dispatch(fetchUserListInThisCourseFail(error.response.data));
-      });
+      axios(config)
+        .then((response) => {
+          // console.log(response.data);
+          dispatch(fetchUserListInThisCourseSuccess(response.data));
+        })
+        .catch((error) => {
+          // console.log(error);
+          dispatch(fetchUserListInThisCourseFail(error.response.data));
+        });
+    }
   };
 };

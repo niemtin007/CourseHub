@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import cx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -66,6 +67,8 @@ const ShowcaseCard = (props) => {
   const { isMe, error, success } = props;
   const { imageLink, courseId, onEnroll, onUserClearMessage } = props;
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -114,15 +117,29 @@ const ShowcaseCard = (props) => {
         </Typography>
       </Box>
 
-      <Box mx={2}>
-        <Button
-          size="small"
-          onClick={() => onEnroll(courseId, isMe)}
-          className={cardStyles.button}
-        >
-          {isMe ? "Leave this course" : "Enroll Now"}
-        </Button>
-      </Box>
+      {user && user.accessToken ? (
+        <Box mx={2}>
+          <Button
+            size="small"
+            onClick={() => onEnroll(courseId, isMe)}
+            className={cardStyles.button}
+          >
+            {isMe ? "Leave this course" : "Enroll Now"}
+          </Button>
+        </Box>
+      ) : (
+        <Box mx={2}>
+          <Box
+            component={Link}
+            to={"/sign-in"}
+            style={{ textDecoration: "none" }}
+          >
+            <Button size="small" className={cardStyles.button}>
+              Login to Enroll
+            </Button>
+          </Box>
+        </Box>
+      )}
 
       <Box mt={2}>
         <Box ml={2}>

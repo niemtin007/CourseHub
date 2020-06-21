@@ -16,6 +16,7 @@ import DropMenu from "../NavigationItems/DropMenu";
 const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    background: "linear-gradient(120deg, #2980b9, #8e44ad)",
   },
   title: {
     flexGrow: 1,

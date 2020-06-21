@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, withRouter } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, CssBaseline, Typography } from "@material-ui/core";
@@ -9,8 +9,8 @@ import rocket from "../../assets/images/pageNotFound/rocket.svg";
 import earth from "../../assets/images/pageNotFound/earth.svg";
 import moon from "../../assets/images/pageNotFound/moon.svg";
 import astronaut from "../../assets/images/pageNotFound/astronaut.svg";
-// import bg_purple from "../../assets/images/pageNotFound/bg_purple.png";
 import overlay_stars from "../../assets/images/pageNotFound/overlay_stars.svg";
+// import bg_purple from "../../assets/images/pageNotFound/bg_purple.png";
 
 const useStyles = makeStyles((theme) => ({
   "@keyframes rocketMovement": {
@@ -200,8 +200,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PageNotFound() {
+const PageNotFound = ({ history }) => {
   const styles = useStyles();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const isAdmin = user && user.maLoaiNguoiDung === "GV";
+  const [isAdminRouter, setIsAdminRouter] = useState(null);
+  const pathName = history.location.pathname;
+
+  if (!isAdminRouter) {
+    if (pathName === "/courses-management") {
+      setIsAdminRouter(true);
+    } else if (pathName === "/users-management") {
+      setIsAdminRouter(true);
+    }
+  }
+
+  if (isAdminRouter && isAdmin) {
+    window.location.reload();
+  }
 
   return (
     <Box className={styles.bgPurple}>
@@ -214,9 +230,15 @@ export default function PageNotFound() {
             alt="image404"
             width="300px"
           />
-          <Link to="/" className={styles.btnGoHome}>
-            <Typography>GO BACK HOME</Typography>
-          </Link>
+          {isAdminRouter && isAdmin ? (
+            <Typography variant="h5">
+              Granting permission to admin...
+            </Typography>
+          ) : (
+            <Link to="/" className={styles.btnGoHome}>
+              <Typography>GO BACK HOME</Typography>
+            </Link>
+          )}
         </Box>
         <Box className={styles.objects}>
           <img
@@ -258,4 +280,6 @@ export default function PageNotFound() {
       </Box>
     </Box>
   );
-}
+};
+
+export default withRouter(PageNotFound);

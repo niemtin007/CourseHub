@@ -105,7 +105,7 @@ function CourseDetail(props) {
   }
 
   let isMe = false;
-  if (nameList.length > 0) {
+  if (nameList && myInfo && nameList.length > 0) {
     isMe = nameList.includes(myInfo.taiKhoan);
   }
 
@@ -141,32 +141,36 @@ function CourseDetail(props) {
                   </Grid>
                 )}
               </Box>
-              <Box my={2}>
-                {loading ? (
-                  <Skeleton variant="text" width={"60%"} />
-                ) : (
-                  <Grid container alignItems="center">
-                    <Box display="flex" flexDirection="column" ml={1}>
-                      <Box display="flex" alignItems="center">
-                        <PersonAddIcon
-                          fontSize="small"
-                          style={{ margin: "0 10" }}
-                        />
-                        {userList && userList.lstHocVien
-                          ? userList.lstHocVien.length
-                          : "0"}
+
+              {myInfo ? (
+                <Box my={2}>
+                  {loading ? (
+                    <Skeleton variant="text" width={"60%"} />
+                  ) : (
+                    <Grid container alignItems="center">
+                      <Box display="flex" flexDirection="column" ml={1}>
+                        <Box display="flex" alignItems="center">
+                          <PersonAddIcon
+                            fontSize="small"
+                            style={{ margin: "0 10" }}
+                          />
+                          {userList && userList.lstHocVien
+                            ? userList.lstHocVien.length
+                            : "0"}
+                        </Box>
+                        <Typography>Enerolled</Typography>
                       </Box>
-                      <Typography>Enerolled</Typography>
-                    </Box>
-                    {userListRender}
-                    <Switch
-                      classes={switchStyles}
-                      checked={onShow}
-                      onChange={(e) => setOnShow(e.target.checked)}
-                    />
-                  </Grid>
-                )}
-              </Box>
+                      {userListRender}
+                      <Switch
+                        classes={switchStyles}
+                        checked={onShow}
+                        onChange={(e) => setOnShow(e.target.checked)}
+                      />
+                    </Grid>
+                  )}
+                </Box>
+              ) : null}
+
               {showAllUserRender}
             </Box>
           </Grid>

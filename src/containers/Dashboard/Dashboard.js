@@ -2,15 +2,8 @@ import React, { Fragment } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import {
-  Grid,
-  Typography,
-  Button,
-  Box,
-  useMediaQuery,
-  CardHeader,
-  Avatar,
-} from "@material-ui/core";
+import { useMediaQuery, CardHeader, Avatar } from "@material-ui/core";
+import { Grid, Button, Box, Typography } from "@material-ui/core";
 
 import { LiveTv, AllInclusive, Bookmark } from "@material-ui/icons";
 
@@ -40,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Dashboard() {
   const classes = useStyles();
-
   const matchSM = useMediaQuery("(min-width:600px)");
 
   return (
