@@ -8,9 +8,6 @@ import thunk from "redux-thunk";
 
 import App from "./App";
 
-// import "./index.css";
-// import * as serviceWorker from "./serviceWorker";
-
 import ui from "./store/reducers/ui";
 import courses from "./store/reducers/courses";
 import auth from "./store/reducers/auth";
@@ -22,9 +19,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   ui,
-  courses,
   auth,
   user,
+  courses,
   usersManager,
   coursesManager,
 });
@@ -45,5 +42,3 @@ const app = (
 );
 
 ReactDOM.render(app, document.getElementById("root"));
-
-// serviceWorker.unregister();

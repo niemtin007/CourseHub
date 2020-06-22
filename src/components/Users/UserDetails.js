@@ -4,7 +4,7 @@ import * as actions from "../../store/actions";
 
 import { useSnackbar } from "notistack";
 
-import { Typography } from "@material-ui/core";
+import { Typography, useMediaQuery } from "@material-ui/core";
 
 import cx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -84,6 +84,7 @@ const useStyles = makeStyles(({ palette, typography }) => ({
 
 const UserDetails = (props) => {
   const styles = useStyles();
+  const matches = useMediaQuery("(min-width:1050px)");
   const shadowStyles = useFadedShadowStyles();
   const borderedGridStyles = useGutterBorderedGridStyles({
     borderColor: "rgba(0, 0, 0, 0.08)",
@@ -225,7 +226,11 @@ const UserDetails = (props) => {
 
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
-      <Box display="flex" alignItems="center" flexWrap="wrap">
+      <Box
+        display="flex"
+        alignItems="center"
+        flexWrap={matches ? "nowrap" : "wrap"}
+      >
         <Box flexGrow={1} m={2}>
           <CardContent>
             <Avatar
@@ -295,9 +300,10 @@ const UserDetails = (props) => {
               {coursesNoneEnrollListRender}
             </ExpansionPanelDetails>
           </ExpansionPanel>
-        </Box>
-        <Box alignSelf="flex-start" flexGrow={2} m={2}>
           {loading ? <Spinner /> : null}
+        </Box>
+
+        <Box flexGrow={1} alignSelf="flex-start" minWidth={250} m={2}>
           <AddUsers selectedUser={selectedUser} preview={true} />
         </Box>
       </Box>

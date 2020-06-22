@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { GmailTabs, GmailTabItem } from "@mui-treasury/components/tabs/gmail";
 
-import { Grid, Box, Typography } from "@material-ui/core";
+import { Grid, Box } from "@material-ui/core";
 
 import CourseCarousel from "./CourseCarousel/CourseCarousel";
 
@@ -60,35 +60,24 @@ function CourseList(props) {
 
   return (
     <Fragment>
-      <Box my={5} style={{ minHeight: 520 }}>
-        <Box mx={6} py={3}>
-          <Typography variant="h5" gutterBottom>
-            <strong>The world's most useless selection of courses</strong>
-          </Typography>
-          <Typography variant="subtitle1" gutterBottom>
-            Choose from 100 online video courses with new additions published
-            every decade
-          </Typography>
-        </Box>
-        <Grid container justify="center">
-          <GmailTabs
-            value={tabNum}
-            onChange={handleChange}
-            variant="scrollable"
-            scrollButtons="on"
-            aria-label="scrollable force tabs"
-          >
-            {courseIndex.map((tab, index) => (
-              <GmailTabItem
-                key={tab.maDanhMuc}
-                label={tab.tenDanhMuc}
-                {...a11yProps(index)}
-              />
-            ))}
-          </GmailTabs>
-          {courseRender}
-        </Grid>
-      </Box>
+      <Grid container justify="center">
+        <GmailTabs
+          value={tabNum}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons="on"
+          aria-label="scrollable force tabs"
+        >
+          {courseIndex.map((tab, index) => (
+            <GmailTabItem
+              key={tab.maDanhMuc}
+              label={tab.tenDanhMuc}
+              {...a11yProps(index)}
+            />
+          ))}
+        </GmailTabs>
+        {courseRender}
+      </Grid>
     </Fragment>
   );
 }
