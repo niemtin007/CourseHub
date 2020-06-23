@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import { Fab, Box, TextField, Grid } from "@material-ui/core";
+import { Fab, Box, TextField, Grid, Tooltip } from "@material-ui/core";
 import * as actions from "../../store/actions";
 import { connect } from "react-redux";
 
@@ -14,6 +14,7 @@ import ChooseGroup from "./InputCustom/ChooseGroup";
 
 const useStyles = makeStyles((theme) => ({
   courseItems: {
+    zIndex: 10,
     width: "100%",
     minWidth: 350,
     backgroundColor: theme.palette.background.paper,
@@ -67,13 +68,15 @@ function CourseList(props) {
         <ListItem>
           <Grid container justify="space-between" alignItems="center">
             <Fab
-              color="inherit"
+              color="primary"
               size="small"
               aria-label="add"
               onClick={() => handleAddCourseClick()}
               disabled={loading}
             >
-              <AddIcon />
+              <Tooltip title="Add" placement="right">
+                <AddIcon />
+              </Tooltip>
             </Fab>
 
             <ChooseGroup />

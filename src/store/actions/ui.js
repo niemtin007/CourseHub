@@ -18,6 +18,13 @@ export const drawClose = () => {
   };
 };
 
+export const darkTheme = (open) => {
+  return {
+    type: actionTypes.DARK_THEME,
+    darkTheme: open,
+  };
+};
+
 export const clearMessage = () => {
   return {
     type: actionTypes.CLEAR_MESSAGE,

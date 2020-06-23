@@ -13,6 +13,7 @@ import {
   IconButton,
   Typography,
   Button,
+  Tooltip,
 } from "@material-ui/core";
 
 import { Edit, Delete } from "@material-ui/icons";
@@ -128,7 +129,9 @@ const CourseCard = (props) => {
           aria-label="delete"
           onClick={() => handleDeleteConfirm(course)}
         >
-          <Delete />
+          <Tooltip title="Delete" placement="right">
+            <Delete />
+          </Tooltip>
         </IconButton>
 
         <IconButton
@@ -136,7 +139,9 @@ const CourseCard = (props) => {
           className={classes.edit}
           onClick={() => handCourseEdit(course)}
         >
-          <Edit />
+          <Tooltip title="Edit" placement="left">
+            <Edit />
+          </Tooltip>
         </IconButton>
       </CardActions>
     </Card>

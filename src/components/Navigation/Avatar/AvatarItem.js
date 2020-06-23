@@ -2,6 +2,8 @@ import React from "react";
 import Badge from "@material-ui/core/Badge";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+import * as actions from "../../../store/actions";
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -35,13 +37,15 @@ const StyledBadge = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    "& > *": {
-      marginLeft: theme.spacing(1),
-    },
+    // [theme.breakpoints.up("sm")]: {
+    //   "& > *": {
+    //     marginLeft: theme.spacing(1),
+    //   },
+    // },
   },
 }));
 
-export default function AvatarItem() {
+const AvatarItem = ({ onSideOpen }) => {
   const classes = useStyles();
 
   return (
@@ -53,9 +57,18 @@ export default function AvatarItem() {
           horizontal: "right",
         }}
         variant="dot"
+        onClick={onSideOpen}
       >
-        <Avatar alt="Remy Sharp" src="https://i.pravatar.cc/300" />
+        <Avatar alt="Remy Sharp" src="https://i.pravatar.cc/150?img=14" />
       </StyledBadge>
     </div>
   );
-}
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSideOpen: () => dispatch(actions.openSidebar()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(AvatarItem);

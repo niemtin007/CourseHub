@@ -1,10 +1,8 @@
 import React, { useState, useEffect, Fragment } from "react";
-
 import { connect } from "react-redux";
 
-import { GmailTabs, GmailTabItem } from "@mui-treasury/components/tabs/gmail";
-
 import { Grid, Box } from "@material-ui/core";
+import { GmailTabs, GmailTabItem } from "@mui-treasury/components/tabs/gmail";
 
 import CourseCarousel from "./CourseCarousel/CourseCarousel";
 
@@ -67,6 +65,7 @@ function CourseList(props) {
           variant="scrollable"
           scrollButtons="on"
           aria-label="scrollable force tabs"
+          style={{ backgroundColor: "inherit" }}
         >
           {courseIndex.map((tab, index) => (
             <GmailTabItem

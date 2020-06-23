@@ -1,12 +1,13 @@
 import axios from "../../axios";
 import * as actionTypes from "./actionTypes";
 
-export const fetchInfoClick = (selectedUser, tabIndex) => {
+export const fetchInfoClick = (selectedUser, tabIndex, avatarIndex) => {
   return {
     type: actionTypes.FETCH_INFO_CLICK,
     tabIndex: tabIndex && Math.abs(tabIndex) !== 1 ? -tabIndex : 2,
     isEdit: false,
     selectedUser: selectedUser,
+    avatarIndex: avatarIndex,
   };
 };
 
@@ -344,6 +345,7 @@ export const disapproveCourse = (courseId, selectedUser) => {
       .then((response) => {
         dispatch(disapproveCourseSuccess(response.data));
         dispatch(fetchCourseApproved(selectedUser));
+        dispatch(fetchCourseApprovalPending(selectedUser));
       })
       .catch((error) => {
         dispatch(disapproveCourseFail(error.response.data));

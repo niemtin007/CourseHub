@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from "react";
 import Hidden from "@material-ui/core/Hidden";
 import { connect } from "react-redux";
+import * as actions from "../../../store/actions";
 
 import { Link, withRouter } from "react-router-dom";
 
@@ -33,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     ...theme.mixins.toolbar,
   },
+  appbar: {
+    background: "linear-gradient(120deg, #2980b9, #8e44ad)",
+  },
   navlink: {
     color: "inherit",
     textDecoration: "none",
@@ -51,6 +55,7 @@ const MenuList = (props) => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const { close, collapsed, sideDraw, history } = props;
+  const { onDrawclose } = props;
 
   const [index, setIndex] = useState(history.location.pathname);
 
@@ -166,8 +171,8 @@ const MenuList = (props) => {
       <Box className={classes.toolbar}>
         <Hidden smUp>
           <AppBar position="absolute">
-            <Toolbar>
-              <IconButton color="inherit" edge="start">
+            <Toolbar className={classes.appbar}>
+              <IconButton color="inherit" edge="start" onClick={onDrawclose}>
                 <Menu />
               </IconButton>
               <Logo />
@@ -212,4 +217,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(withRouter(MenuList));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDrawclose: () => dispatch(actions.drawClose()),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(MenuList));

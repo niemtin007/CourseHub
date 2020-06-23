@@ -1,10 +1,7 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
-export default responsiveFontSizes(
+const theme = responsiveFontSizes(
   createMuiTheme({
-    // palette: {
-    //   type: "dark",
-    // },
     mixins: {
       toolbar: {
         height: 56,
@@ -12,3 +9,5 @@ export default responsiveFontSizes(
     },
   })
 );
+
+export default theme;

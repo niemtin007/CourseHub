@@ -161,11 +161,13 @@ function CourseDetail(props) {
                         <Typography>Enerolled</Typography>
                       </Box>
                       {userListRender}
-                      <Switch
-                        classes={switchStyles}
-                        checked={onShow}
-                        onChange={(e) => setOnShow(e.target.checked)}
-                      />
+                      <Tooltip title="Show All">
+                        <Switch
+                          classes={switchStyles}
+                          checked={onShow}
+                          onChange={(e) => setOnShow(e.target.checked)}
+                        />
+                      </Tooltip>
                     </Grid>
                   )}
                 </Box>

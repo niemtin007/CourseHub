@@ -2,9 +2,11 @@ import React, { Fragment } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Drawer, SwipeableDrawer, Hidden } from "@material-ui/core";
+import { Box, Divider, Hidden } from "@material-ui/core";
+import { Drawer, SwipeableDrawer } from "@material-ui/core";
 
 import MenuList from "../NavigationItems/MenuList";
+import AvatarInfo from "../Avatar/AvatarInfo";
 
 const drawerWidth = 220;
 
@@ -14,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerOpen: {
     width: drawerWidth,
+    overflow: "hidden",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -35,6 +38,20 @@ const useStyles = makeStyles((theme) => ({
 const Sidebar = ({ openSidebar, drawSidebar, open, close }) => {
   const classes = useStyles();
 
+  const menuRender = (
+    <Box display="flex" flexDirection="column" height="100vh">
+      <Box flexGrow={1}>
+        <MenuList />
+      </Box>
+      {openSidebar || drawSidebar ? (
+        <Box>
+          <AvatarInfo />
+          <Divider />
+        </Box>
+      ) : null}
+    </Box>
+  );
+
   return (
     <Fragment>
       {/* Left menu for desktop */}
@@ -52,7 +69,7 @@ const Sidebar = ({ openSidebar, drawSidebar, open, close }) => {
             }),
           }}
         >
-          <MenuList />
+          {menuRender}
         </Drawer>
       </Hidden>
       {/* Left menu for mobile */}
@@ -62,7 +79,7 @@ const Sidebar = ({ openSidebar, drawSidebar, open, close }) => {
         onClose={close}
         onOpen={open}
       >
-        <MenuList close={close} />
+        {menuRender}
       </SwipeableDrawer>
     </Fragment>
   );

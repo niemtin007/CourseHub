@@ -1,4 +1,10 @@
-export { openSidebar, drawOpen, drawClose, clearMessage } from "./ui";
+export {
+  openSidebar,
+  drawOpen,
+  drawClose,
+  darkTheme,
+  clearMessage,
+} from "./ui";
 
 export { fetchCourseIndex, fetchCourses, fetchCourseDetail } from "./courses";
 

@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { useMediaQuery, Avatar } from "@material-ui/core";
@@ -30,7 +31,7 @@ import tileimage2 from "../../assets/images/blog/img-2.jpg";
 import tileimage3 from "../../assets/images/blog/img-3.jpg";
 import tileimage4 from "../../assets/images/blog/img-4.jpg";
 import tileimage5 from "../../assets/images/blog/img-5.jpg";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   heroText: {
@@ -191,7 +192,7 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
   );
 };
 
-function Dashboard() {
+function Dashboard({ darkTheme }) {
   const classes = useStyles();
   const matchSM = useMediaQuery("(min-width:600px)");
   const matchMD = useMediaQuery("(min-width:1000px)");
@@ -207,7 +208,7 @@ function Dashboard() {
     <svg
       viewBox="0 0 1430 140"
       className={classes.topSwoop}
-      fill="#fafafa"
+      fill={darkTheme ? "#303030" : "#fafafa"}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M1440 0v59.969c-65.287-39.594-188.865-55.343-370.736-47.248C766 26.221 627.87 140 277 140 171.698 140 79.365 124.417 0 93.25V0h1440z"></path>
@@ -218,7 +219,7 @@ function Dashboard() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 1430 140"
-      fill="#fafafa"
+      fill={darkTheme ? "#303030" : "#fafafa"}
       className={classes.bottomSwoop}
     >
       <path d="M0 140h1440V46.75C1360.635 15.583 1268.302 0 1163 0 812.13 0 674 113.78 370.736 127.279 188.866 135.374 65.286 119.625 0 80.03V140z"></path>
@@ -356,7 +357,7 @@ function Dashboard() {
               </Typography>
               <Box ml={1} display="flex" flexDirection="column">
                 <Typography variant="h4">
-                  CourseHub users search the topic you want to learn
+                  Easy to search the topic you want to learn
                 </Typography>
                 <Typography style={{ marginTop: 16 }}>
                   Course Hub is collect on many resourses. People who study at
@@ -456,4 +457,10 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    darkTheme: state.ui.darkTheme,
+  };
+};
+
+export default connect(mapStateToProps)(Dashboard);

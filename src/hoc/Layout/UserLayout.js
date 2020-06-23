@@ -4,32 +4,46 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 
 import { CssBaseline } from "@material-ui/core";
-import { ThemeProvider, makeStyles } from "@material-ui/core/styles";
-
-import theme from "../../components/UI/Theme";
+import { makeStyles, responsiveFontSizes } from "@material-ui/core/styles";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 import Appbar from "../../components/Navigation/Appbar/Appbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  toolbar: {
-    marginBottom: 48,
-  },
-  content: {
-    flexGrow: 1,
-    overflow: "hidden",
-    paddingTop: theme.spacing(1),
-  },
-}));
+// import theme from "../../components/UI/Theme";
 
 const UserLayout = (props) => {
-  const classes = useStyles();
+  const { sideOpen, sideDraw, darkTheme } = props;
+  const { onSideOpen, onDrawOpen, onDrawclose } = props;
 
-  let { sideOpen, sideDraw } = props;
-  let { onSideOpen, onDrawOpen, onDrawclose } = props;
+  const theme = responsiveFontSizes(
+    createMuiTheme({
+      palette: {
+        type: darkTheme ? "dark" : "light",
+      },
+      mixins: {
+        toolbar: {
+          height: 56,
+        },
+      },
+    })
+  );
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      display: "flex",
+    },
+    toolbar: {
+      marginBottom: 48,
+    },
+    content: {
+      flexGrow: 1,
+      overflow: "hidden",
+      paddingTop: theme.spacing(1),
+    },
+  }));
+
+  const classes = useStyles();
 
   return (
     <ThemeProvider theme={theme}>
@@ -58,6 +72,7 @@ const mapStateToProps = (state) => {
   return {
     sideOpen: state.ui.sideOpen,
     sideDraw: state.ui.sideDraw,
+    darkTheme: state.ui.darkTheme,
   };
 };
 

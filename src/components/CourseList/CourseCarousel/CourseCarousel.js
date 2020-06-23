@@ -1,7 +1,6 @@
 import React from "react";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-import { Grid } from "@material-ui/core";
+import { Grid, useMediaQuery } from "@material-ui/core";
 
 import Carousel from "../../UI/Carousel";
 import CourseCard from "../CourseCard/CourseCard";

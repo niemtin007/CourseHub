@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Menu, Box } from "@material-ui/core";
+import { Menu, Box, useMediaQuery } from "@material-ui/core";
 import { Button, ButtonGroup, IconButton } from "@material-ui/core";
 
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
@@ -12,6 +12,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 import AvatarItem from "../Avatar/AvatarItem";
+import DarkThemeSwitch from "../../SwitchButton/DarkThemeSwitch";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -37,49 +38,64 @@ const useStyles = makeStyles((theme) => ({
 const DropMenu = (props) => {
   const classes = useStyles();
   const { isAuthenticated } = props;
+  const matchSM = useMediaQuery("(min-width:600px)");
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const menuRender = isAuthenticated ? (
-    <Box>
-      <Button
-        disableElevation
-        color="primary"
-        variant="contained"
-        size="small"
-        startIcon={<ExitToAppIcon />}
-        className={classes.button}
-        component={Link}
-        to={"/logout"}
-      >
-        Log Out
-      </Button>
-      <IconButton disableRipple style={{ padding: 0 }}>
-        <AvatarItem />
-      </IconButton>
+    <Box
+      display="flex"
+      flexDirection={matchSM ? "row" : "column-reverse"}
+      alignItems="center"
+      minWidth={matchSM ? 0 : 180}
+    >
+      <Box m={matchSM ? 0 : 1}>
+        <Button
+          disableElevation
+          color="primary"
+          variant="contained"
+          size="small"
+          startIcon={<ExitToAppIcon />}
+          className={classes.button}
+          component={Link}
+          to={"/logout"}
+        >
+          Log Out
+        </Button>
+      </Box>
+      <Box m={matchSM ? 0 : 1}>
+        <DarkThemeSwitch />
+      </Box>
+      <Box m={matchSM ? 0 : 1}>
+        <IconButton disableRipple style={{ padding: 0 }}>
+          <AvatarItem />
+        </IconButton>
+      </Box>
     </Box>
   ) : (
-    <ButtonGroup disableElevation variant="contained" size="small">
-      <Button
-        color="primary"
-        startIcon={<VpnKeyIcon />}
-        component={Link}
-        to={"/sign-in"}
-        className={classes.button}
-      >
-        Login
-      </Button>
-      <Button
-        color="default"
-        startIcon={<PersonAddIcon />}
-        component={Link}
-        to={"/sign-up"}
-        className={classes.button}
-      >
-        Sign Up
-      </Button>
-    </ButtonGroup>
+    <Box m={matchSM ? 0 : 1} minWidth={matchSM ? 0 : 180}>
+      <ButtonGroup disableElevation variant="contained" size="small">
+        <Button
+          color="primary"
+          startIcon={<VpnKeyIcon />}
+          component={Link}
+          to={"/sign-in"}
+          className={classes.button}
+        >
+          Login
+        </Button>
+        <Button
+          color="default"
+          startIcon={<PersonAddIcon />}
+          component={Link}
+          to={"/sign-up"}
+          className={classes.button}
+        >
+          Sign Up
+        </Button>
+      </ButtonGroup>
+    </Box>
   );
 
   return (
@@ -114,17 +130,8 @@ const DropMenu = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.auth.loading,
-    error: state.auth.error,
     isAuthenticated: state.auth.token !== null,
-    authRedirectPath: state.auth.authRedirectPath,
   };
 };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     onAuth: (values, history) => dispatch(actions.auth(values, history)),
-//   };
-// };
 
 export default connect(mapStateToProps)(DropMenu);

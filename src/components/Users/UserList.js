@@ -16,6 +16,7 @@ import {
   TextField,
   Button,
   Grid,
+  Tooltip,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
@@ -87,8 +88,8 @@ function UserList(props) {
     }
   }, [error, success, enqueueSnackbar]);
 
-  const handleInfo = (selectedUser) => {
-    onFetchInfoClick(selectedUser, tabIndex);
+  const handleInfo = (selectedUser, avatarIndex) => {
+    onFetchInfoClick(selectedUser, tabIndex, avatarIndex);
     onFetchCourseApprovalPending(selectedUser);
     onFetchCourseApproved(selectedUser);
     onFetchCourseNoneEnroll(selectedUser);
@@ -121,7 +122,11 @@ function UserList(props) {
       const isGV = user.maLoaiNguoiDung === "GV";
       const labelId = `checkbox-list-secondary-label-${index}`;
       return (
-        <ListItem key={user.taiKhoan} button onClick={() => handleInfo(user)}>
+        <ListItem
+          key={user.taiKhoan}
+          button
+          onClick={() => handleInfo(user, index)}
+        >
           <ListItemAvatar>
             <Badge
               badgeContent={isGV ? user.maLoaiNguoiDung : null}
@@ -139,21 +144,25 @@ function UserList(props) {
             secondary={user.email}
           />
           <ListItemSecondaryAction>
-            <IconButton
-              edge="end"
-              aria-label="edit"
-              onClick={() => onEditUserClick(user, tabIndex)}
-            >
-              <EditIcon />
-            </IconButton>
+            <Tooltip title="Edit" placement="left">
+              <IconButton
+                edge="end"
+                aria-label="edit"
+                onClick={() => onEditUserClick(user, tabIndex)}
+              >
+                <EditIcon />
+              </IconButton>
+            </Tooltip>
 
-            <IconButton
-              edge="end"
-              aria-label="delete"
-              onClick={() => handleDeleteConfirm(user)}
-            >
-              <DeleteIcon />
-            </IconButton>
+            <Tooltip title="Delete" placement="right">
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                onClick={() => handleDeleteConfirm(user)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
           </ListItemSecondaryAction>
         </ListItem>
       );
@@ -172,7 +181,9 @@ function UserList(props) {
               onClick={() => onAddUserClick()}
               disabled={loading}
             >
-              <AddIcon />
+              <Tooltip title="Add" placement="right">
+                <AddIcon />
+              </Tooltip>
             </Fab>
 
             <ChooseGroup />
@@ -211,8 +222,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchInfoClick: (selectedUser, tabIndex) =>
-      dispatch(actions.fetchInfoClick(selectedUser, tabIndex)),
+    onFetchInfoClick: (selectedUser, tabIndex, avatarIndex) =>
+      dispatch(actions.fetchInfoClick(selectedUser, tabIndex, avatarIndex)),
     onSearchUser: (keyWord, group) =>
       dispatch(actions.searchUser(keyWord, group)),
     onEditUserClick: (selectedUser, tabIndex) =>

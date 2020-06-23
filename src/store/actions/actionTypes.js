@@ -1,6 +1,7 @@
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 export const USER_CLEAR_MESSAGE = "USER_CLEAR_MESSAGE";
 
+export const DARK_THEME = "DARK_THEME";
 export const OPEN_SIDEBAR = "OPEN_SIDEBAR";
 export const DRAW_SIDEBAR = "DRAW_SIDEBAR";
 export const DRAW_SIDEBAR_OPEN = "DRAW_SIDEBAR_OPEN";

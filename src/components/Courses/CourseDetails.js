@@ -4,7 +4,7 @@ import * as actions from "../../store/actions";
 
 import { useSnackbar } from "notistack";
 
-import { Typography } from "@material-ui/core";
+import { Typography, Tooltip } from "@material-ui/core";
 
 import cx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -140,21 +140,29 @@ const CourseDetails = (props) => {
                   src={`https://i.pravatar.cc/150?img=${index + 1}`}
                 />
               </ListItemAvatar>
-              <ListItemText id={user.biDanh} primary={user.taiKhoan} />
+              <ListItemText
+                id={user.biDanh}
+                primary={user.taiKhoan}
+                // style={{ paddingRight: 90 }}
+              />
               <ListItemSecondaryAction>
                 <IconButton
                   edge="end"
                   aria-label="allow"
                   onClick={() => onApproveUserPending(selectedCourse, user)}
                 >
-                  <ThumbUpAltIcon />
+                  <Tooltip title="Approve" placement="left">
+                    <ThumbUpAltIcon />
+                  </Tooltip>
                 </IconButton>
                 <IconButton
                   edge="end"
                   aria-label="disApprovel"
                   onClick={() => onDisapproveUser(selectedCourse, user)}
                 >
-                  <BlockIcon />
+                  <Tooltip title="Ban" placement="right">
+                    <BlockIcon />
+                  </Tooltip>
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
@@ -184,7 +192,9 @@ const CourseDetails = (props) => {
                   aria-label="disApprovel"
                   onClick={() => onDisapproveUser(selectedCourse, user)}
                 >
-                  <BlockIcon />
+                  <Tooltip title="Ban" placement="right">
+                    <BlockIcon />
+                  </Tooltip>
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
@@ -214,7 +224,9 @@ const CourseDetails = (props) => {
                   aria-label="allow"
                   onClick={() => onApproveUserPending(selectedCourse, user)}
                 >
-                  <ThumbUpAltIcon />
+                  <Tooltip title="Approve" placement="left">
+                    <ThumbUpAltIcon />
+                  </Tooltip>
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
@@ -236,6 +248,7 @@ const CourseDetails = (props) => {
           <ExpansionPanel
             expanded={expanded === "panel1"}
             onChange={handleChange("panel1")}
+            disabled={loading}
           >
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
@@ -251,9 +264,11 @@ const CourseDetails = (props) => {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>{usersPendingRender}</ExpansionPanelDetails>
           </ExpansionPanel>
+
           <ExpansionPanel
             expanded={expanded === "panel2"}
             onChange={handleChange("panel2")}
+            disabled={loading}
           >
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
@@ -269,9 +284,11 @@ const CourseDetails = (props) => {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>{usersApprovedRender}</ExpansionPanelDetails>
           </ExpansionPanel>
+
           <ExpansionPanel
             expanded={expanded === "panel3"}
             onChange={handleChange("panel3")}
+            disabled={loading}
           >
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}

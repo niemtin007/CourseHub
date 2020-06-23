@@ -4,7 +4,7 @@ import * as actions from "../../store/actions";
 
 import { useSnackbar } from "notistack";
 
-import { Typography, useMediaQuery } from "@material-ui/core";
+import { Typography, useMediaQuery, Tooltip } from "@material-ui/core";
 
 import cx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -96,6 +96,7 @@ const UserDetails = (props) => {
     error,
     loading,
     selectedUser,
+    avatarIndex,
     coursesPendingList,
     coursesApprovedList,
     coursesNoneEnrollList,
@@ -152,7 +153,20 @@ const UserDetails = (props) => {
                     onApproveCoursePending(course.maKhoaHoc, selectedUser)
                   }
                 >
-                  <ThumbUpAltIcon />
+                  <Tooltip title="Approve" placement="right">
+                    <ThumbUpAltIcon />
+                  </Tooltip>
+                </IconButton>
+                <IconButton
+                  edge="end"
+                  aria-label="quickAllow"
+                  onClick={() =>
+                    onDisapproveCourse(course.maKhoaHoc, selectedUser)
+                  }
+                >
+                  <Tooltip title="Ban" placement="right">
+                    <BlockIcon />
+                  </Tooltip>
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
@@ -183,7 +197,9 @@ const UserDetails = (props) => {
                     onDisapproveCourse(course.maKhoaHoc, selectedUser)
                   }
                 >
-                  <BlockIcon />
+                  <Tooltip title="Ban" placement="right">
+                    <BlockIcon />
+                  </Tooltip>
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
@@ -214,7 +230,9 @@ const UserDetails = (props) => {
                     onApproveCoursePending(course.maKhoaHoc, selectedUser)
                   }
                 >
-                  <ThumbUpAltIcon />
+                  <Tooltip title="Approve" placement="right">
+                    <ThumbUpAltIcon />
+                  </Tooltip>
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
@@ -235,7 +253,7 @@ const UserDetails = (props) => {
           <CardContent>
             <Avatar
               className={styles.avatar}
-              src={"https://i.pravatar.cc/300"}
+              src={`https://i.pravatar.cc/150?img=${avatarIndex + 1}`}
             />
             <h3 className={styles.heading}>{selectedUser.taiKhoan}</h3>
           </CardContent>
@@ -243,6 +261,7 @@ const UserDetails = (props) => {
           <ExpansionPanel
             expanded={expanded === "panel1"}
             onChange={handleChange("panel1")}
+            disabled={loading}
           >
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
@@ -260,9 +279,11 @@ const UserDetails = (props) => {
               {coursesPendingRender}
             </ExpansionPanelDetails>
           </ExpansionPanel>
+
           <ExpansionPanel
             expanded={expanded === "panel2"}
             onChange={handleChange("panel2")}
+            disabled={loading}
           >
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
@@ -280,9 +301,11 @@ const UserDetails = (props) => {
               {coursesApprovedRender}
             </ExpansionPanelDetails>
           </ExpansionPanel>
+
           <ExpansionPanel
             expanded={expanded === "panel3"}
             onChange={handleChange("panel3")}
+            disabled={loading}
           >
             <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
@@ -317,6 +340,7 @@ const mapStateToProps = (state) => {
     success: state.usersManager.success,
     loading: state.usersManager.loading,
     selectedUser: state.usersManager.selectedUser,
+    avatarIndex: state.usersManager.avatarIndex,
     coursesPendingList: state.usersManager.coursesPendingList,
     coursesApprovedList: state.usersManager.coursesApprovedList,
     coursesNoneEnrollList: state.usersManager.coursesNoneEnrollList,

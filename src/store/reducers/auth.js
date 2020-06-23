@@ -61,6 +61,7 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.CHOOSE_GROUP:
       return chooseGroup(state, action);
+
     // case actionTypes.SET_AUTH_REDIRECT_PATH:
     //   return setAuthRedirectPath(state, action);
     default:

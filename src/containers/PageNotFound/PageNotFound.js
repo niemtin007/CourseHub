@@ -222,62 +222,69 @@ const PageNotFound = ({ history }) => {
   return (
     <Box className={styles.bgPurple}>
       <CssBaseline />
-      <Box className={styles.stars}>
-        <Box className={styles.centralBody}>
-          <img
-            className={styles.image404}
-            src={image404}
-            alt="image404"
-            width="300px"
-          />
-          {isAdminRouter && isAdmin ? (
-            <Typography variant="h5">
-              Granting permission to admin...
-            </Typography>
-          ) : (
+      {isAdminRouter && isAdmin ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height={"100vh"}
+        >
+          <Typography variant="h5" style={{ color: "white" }}>
+            Granting permission to admin...
+          </Typography>
+        </Box>
+      ) : (
+        <Box className={styles.stars}>
+          <Box className={styles.centralBody}>
+            <img
+              className={styles.image404}
+              src={image404}
+              alt="image404"
+              width="300px"
+            />
             <Link to="/" className={styles.btnGoHome}>
               <Typography>GO BACK HOME</Typography>
             </Link>
-          )}
-        </Box>
-        <Box className={styles.objects}>
-          <img
-            className={styles.objectRocket}
-            src={rocket}
-            alt="objectRocket"
-            width="100px"
-          />
-          <Box>
+          </Box>
+          <Box className={styles.objects}>
             <img
-              className={styles.objectEarth}
-              src={earth}
-              alt="objectEarth"
+              className={styles.objectRocket}
+              src={rocket}
+              alt="objectRocket"
               width="100px"
             />
-            <img
-              className={styles.objectMoon}
-              src={moon}
-              alt="objectMoon"
-              width="80px"
-            />
+            <Box>
+              <img
+                className={styles.objectEarth}
+                src={earth}
+                alt="objectEarth"
+                width="100px"
+              />
+              <img
+                className={styles.objectMoon}
+                src={moon}
+                alt="objectMoon"
+                width="80px"
+              />
+            </Box>
+            <Box className={styles.boxAstronaut}>
+              <img
+                className={styles.objectAstronaut}
+                src={astronaut}
+                alt="objectAstronaut"
+                width="140px"
+              />
+            </Box>
           </Box>
-          <Box className={styles.boxAstronaut}>
-            <img
-              className={styles.objectAstronaut}
-              src={astronaut}
-              alt="objectAstronaut"
-              width="140px"
-            />
+          <Box className={styles.star}>
+            <Box />
+            <Box />
+            <Box />
+            <Box />
+            <Box />
           </Box>
         </Box>
-        <Box className={styles.star}>
-          <Box />
-          <Box />
-          <Box />
-          <Box />
-          <Box />
-        </Box>
-      </Box>
+      )}
     </Box>
   );
 };

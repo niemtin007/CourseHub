@@ -45,8 +45,14 @@ const CourseTabs = () => {
         variant="scrollable"
         scrollButtons="on"
         aria-label="scrollable force tabs"
+        style={{ backgroundColor: "inherit" }}
       >
-        <GmailTabItem icon={<Inbox />} label={"Overview"} {...a11yProps(0)} />
+        <GmailTabItem
+          icon={<Inbox />}
+          label={"Overview"}
+          {...a11yProps(0)}
+          style={{ color: "white" }}
+        />
         <GmailTabItem
           icon={<People />}
           label={"Curriculum"}

@@ -4,6 +4,7 @@ import { updateObject } from "../utility";
 const initialState = {
   sideOpen: false,
   sideDraw: false,
+  darkTheme: false,
 };
 
 const openAnchor = (state, action) => {
@@ -18,14 +19,24 @@ const drawClose = (state, action) => {
   return updateObject(state, { sideDraw: false });
 };
 
+const darkTheme = (state, action) => {
+  return updateObject(state, { darkTheme: action.darkTheme });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.DARK_THEME:
+      return darkTheme(state, action);
+
     case actionTypes.OPEN_SIDEBAR:
       return openAnchor(state, action);
+
     case actionTypes.DRAW_SIDEBAR_OPEN:
       return drawOpen(state, action);
+
     case actionTypes.DRAW_SIDEBAR_CLOSE:
       return drawClose(state, action);
+
     default:
       return state;
   }

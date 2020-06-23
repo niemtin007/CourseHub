@@ -4,6 +4,7 @@ import { updateObject } from "../utility";
 const initialState = {
   userList: [],
   tabIndex: null,
+  avatarIndex: null,
   isEdit: null,
   selectedUser: null,
   coursesPendingList: [],
@@ -26,6 +27,7 @@ const fetchInfoClick = (state, action) => {
     isEdit: null,
     tabIndex: action.tabIndex,
     selectedUser: action.selectedUser,
+    avatarIndex: action.avatarIndex,
   });
 };
 
