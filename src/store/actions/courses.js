@@ -22,14 +22,16 @@ export const fetchCourseIndexFail = (error) => {
   };
 };
 
-export const fetchCourseIndex = () => {
+export const fetchCourseIndex = (init) => {
   return (dispatch) => {
     dispatch(fetchCourseIndexStart());
     axios
       .get("/QuanLyKhoaHoc/LayDanhMucKhoaHoc")
       .then((response) => {
         dispatch(fetchCourseIndexSuccess(response.data));
-        dispatch(fetchCourses(response.data[0].maDanhMuc));
+        if (init) {
+          dispatch(fetchCourses(response.data[0].maDanhMuc));
+        }
       })
       .catch((error) => {
         dispatch(fetchCourseIndexFail(error));
@@ -58,14 +60,24 @@ export const fetchCoursesFail = (error) => {
   };
 };
 
-export const fetchCourses = (maDanhMuc) => {
+export const fetchCourses = (courseType, group, keyWord) => {
   return (dispatch) => {
     dispatch(fetchCoursesStart());
+    if (group === undefined) {
+      group = "GP08";
+    }
+    let url = `/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${courseType}&MaNhom=${group}`;
+    if (courseType === "all") {
+      url = `/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${group}`;
+    }
+    if (keyWord) {
+      url = `/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${keyWord}&MaNhom=${group}`;
+    }
+
     axios
-      .get(
-        `/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${maDanhMuc}&MaNhom=GP08`
-      )
+      .get(url)
       .then((response) => {
+        // console.log("Courses List: ", response.data);
         dispatch(fetchCoursesSuccess(response.data));
       })
       .catch((error) => {
@@ -105,6 +117,51 @@ export const fetchCourseDetail = (courseId) => {
       })
       .catch((error) => {
         dispatch(fetchCourseDetailFail(error));
+      });
+  };
+};
+
+// ----------------- User Detail ------------------ //
+export const fetchUserDetailStart = () => {
+  return {
+    type: actionTypes.FETCH_USER_DETAIL_FAIL,
+  };
+};
+
+export const fetchUserDetailSuccess = (userDetail) => {
+  return {
+    type: actionTypes.FETCH_USER_DETAIL_SUCCESS,
+    userDetail: userDetail,
+  };
+};
+
+export const fetchUserDetailFail = (error) => {
+  return {
+    type: actionTypes.FETCH_USER_DETAIL_FAIL,
+    error: error,
+  };
+};
+
+export const fetchUserDetail = () => {
+  return (dispatch) => {
+    dispatch(fetchUserDetailStart());
+    const user = JSON.parse(localStorage.getItem("user"));
+    const url = "/QuanLyNguoiDung/ThongTinTaiKhoan";
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${user.accessToken}`,
+    };
+    const data = {
+      taiKhoan: user.taiKhoan,
+    };
+
+    axios({ method: "post", url, headers, data })
+      .then((response) => {
+        // console.log("User Detail: ", response.data);
+        dispatch(fetchUserDetailSuccess(response.data));
+      })
+      .catch((error) => {
+        dispatch(fetchUserDetailFail(error));
       });
   };
 };

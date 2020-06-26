@@ -41,12 +41,12 @@ function CourseList(props) {
   const { onFetchCourseList, onAddCourseClick, onFetchCourseIndex } = props;
 
   useEffect(() => {
-    onFetchCourseList(null, group, courseType);
-  }, [onFetchCourseList, group, courseType]);
-
-  useEffect(() => {
     onFetchCourseIndex();
   }, [onFetchCourseIndex]);
+
+  useEffect(() => {
+    onFetchCourseList(null, group, courseType);
+  }, [onFetchCourseList, group, courseType]);
 
   const handleAddCourseClick = () => {
     onAddCourseClick();

@@ -3,11 +3,21 @@ import { connect } from "react-redux";
 
 import { Grid, Box } from "@material-ui/core";
 import { GmailTabs, GmailTabItem } from "@mui-treasury/components/tabs/gmail";
+import { makeStyles } from "@material-ui/core/styles";
 
 import CourseCarousel from "./CourseCarousel/CourseCarousel";
 
 import * as actions from "../../store/actions";
 import SkeletonCard from "../UI/SkeletonCard";
+
+const useStyles = makeStyles((theme) => ({
+  gmailTabs: {
+    backgroundColor: "inherit",
+  },
+  wrapper: {
+    color: "darkgray !important",
+  },
+}));
 
 function TabPanel({ children, tabNum, index, ...other }) {
   return (
@@ -31,12 +41,13 @@ function a11yProps(index) {
 }
 
 function CourseList(props) {
+  const classes = useStyles();
   const [tabNum, setTabNum] = useState(0);
   const { courseIndex, courseList, loading } = props;
   const { onfetchCourseIndex, onfetchCourses } = props;
 
   useEffect(() => {
-    onfetchCourseIndex();
+    onfetchCourseIndex(true);
   }, [onfetchCourseIndex]);
 
   const handleChange = (_, newValue) => {
@@ -65,12 +76,13 @@ function CourseList(props) {
           variant="scrollable"
           scrollButtons="on"
           aria-label="scrollable force tabs"
-          style={{ backgroundColor: "inherit" }}
+          className={classes.gmailTabs}
         >
           {courseIndex.map((tab, index) => (
             <GmailTabItem
               key={tab.maDanhMuc}
               label={tab.tenDanhMuc}
+              classes={{ wrapper: classes.wrapper }}
               {...a11yProps(index)}
             />
           ))}
@@ -91,7 +103,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onfetchCourseIndex: () => dispatch(actions.fetchCourseIndex()),
+    onfetchCourseIndex: (init) => dispatch(actions.fetchCourseIndex(init)),
     onfetchCourses: (courseIndex) =>
       dispatch(actions.fetchCourses(courseIndex)),
   };

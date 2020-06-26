@@ -1,11 +1,95 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Box, Grid } from "@material-ui/core";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions";
 
-const Courses = () => {
+import SearchBarCustom from "../../components/CourseList/SearchBarCustom/SearchBarCustom";
+import SortButton from "../../components/CourseList/SortButton/SortButton";
+import FilterButton from "../../components/CourseList/FilterButton/FilterButton";
+import GroupButton from "../../components/CourseList/GroupButton/GroupButton";
+import CourseCardItem from "../../components/CourseList/CourseCard/CourseCard";
+import Spinner from "../../components/UI/Spinner/Spinner";
+
+const Courses = (props) => {
+  const { courseList, loading } = props;
+  const { onfetchCourses } = props;
+  const [courseType, setCourseType] = useState("all");
+  const [sortBy, setSortBy] = useState("date");
+  const [group, setGroup] = useState("GP08");
+  const [keyWord, setKeyWord] = useState(null);
+
+  useEffect(() => {
+    onfetchCourses(courseType, group, keyWord);
+  }, [onfetchCourses, courseType, group, keyWord]);
+
+  const handleChangeKeyWord = (word) => {
+    setCourseType("all");
+    setTimeout(() => {
+      setKeyWord(word);
+    }, 1500);
+  };
+
+  let courseListRender = <Spinner />;
+  if (!loading && courseList.length > 0) {
+    courseListRender = courseList.map((course, index) => (
+      <Grid item key={index}>
+        <CourseCardItem course={course} />
+      </Grid>
+    ));
+  }
+
   return (
-    <div>
-      <h1>Courses List</h1>
-    </div>
+    <Box>
+      <Box
+        pt={5}
+        mb={2}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexWrap="wrap"
+      >
+        <Box m={1}>
+          <SortButton
+            sortBy={sortBy}
+            onChangeSortBy={(sort) => setSortBy(sort)}
+          />
+        </Box>
+        <Box m={1}>
+          <FilterButton
+            courseType={courseType}
+            onChangeIndex={(code) => setCourseType(code)}
+          />
+        </Box>
+        <Box m={1}>
+          <GroupButton
+            group={group}
+            onChangeGroup={(choosen) => setGroup(choosen)}
+          />
+        </Box>
+        <Box m={1}>
+          <SearchBarCustom onChangeKeyWord={handleChangeKeyWord} />
+        </Box>
+      </Box>
+
+      <Grid container spacing={2} justify="center">
+        {courseListRender}
+      </Grid>
+    </Box>
   );
 };
 
-export default Courses;
+const mapStateToProps = (state) => {
+  return {
+    courseList: state.courses.courseList,
+    loading: state.courses.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onfetchCourses: (courseType, group, keyWord) =>
+      dispatch(actions.fetchCourses(courseType, group, keyWord)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Courses);

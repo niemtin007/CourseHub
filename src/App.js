@@ -7,6 +7,7 @@ import UserLayout from "./hoc/Layout/UserLayout";
 
 import Dashboard from "./containers/Dashboard/Dashboard";
 import Courses from "./containers/Courses/Courses";
+import MyCourses from "./containers/Courses/MyCourses";
 import Auth from "./containers/Auth/Auth";
 import CourseDetail from "./components/CourseList/CourseDetail/CourseDetail";
 import Logout from "./containers/Auth/Logout/Logout";
@@ -58,6 +59,7 @@ const App = ({ onTryAutoSignup }) => {
         {/* With Layout */}
         <RouteUser path="/" exact Component={Dashboard} />
         <RouteUser path="/courses" exact Component={Courses} />
+        <RouteUser path="/my-courses" exact Component={MyCourses} />
         <RouteUser path="/courses/:id" Component={CourseDetail} />
         <RouteUser path="/logout" Component={Logout} />
         <RouteAdmin

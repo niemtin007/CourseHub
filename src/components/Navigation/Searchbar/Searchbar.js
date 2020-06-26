@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import * as actions from "../../../store/actions";
+
+import { Link } from "react-router-dom";
+import { Divider } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 
-// Material-UI Components
 import InputBase from "@material-ui/core/InputBase";
 
-// Material-UI Icons
 import SearchIcon from "@material-ui/icons/Search";
 
-// Style JSS (CSS)
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+
 const useStyles = makeStyles((theme) => ({
   search: {
     position: "relative",
@@ -43,16 +51,45 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "15ch",
       "&:focus": {
-        width: "22ch",
+        width: "28ch",
       },
     },
   },
+  searchResult: {
+    position: "absolute",
+    top: 40,
+    left: 0,
+    width: "100%",
+    maxHeight: "40vh",
+    overflowY: "auto",
+    backgroundColor: theme.palette.background.paper,
+  },
+  link: {
+    textDecoration: "none",
+    textTransform: "none",
+    color: "darkgray",
+  },
 }));
 
-export default function Header(props) {
+const Searchbar = (props) => {
   const classes = useStyles();
+  const { courseList } = props;
+  const { onfetchCourses } = props;
+  const [keyWord, setKeyWord] = useState(null);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    onfetchCourses("all", "GP08", keyWord);
+  }, [onfetchCourses, keyWord]);
+
+  const handleKeyWord = (value) => {
+    setTimeout(() => {
+      setKeyWord(value);
+      setShow(true);
+    }, 1500);
+  };
 
   return (
     <div className={classes.search}>
@@ -67,7 +104,46 @@ export default function Header(props) {
           input: classes.inputInput,
         }}
         inputProps={{ "aria-label": "search" }}
+        onChange={(event) => handleKeyWord(event.target.value)}
       />
+      {show && keyWord && courseList && courseList.length > 0 ? (
+        <List className={classes.searchResult}>
+          {courseList.map((course) => (
+            <Link
+              key={course.maKhoaHoc}
+              to={`/courses/${course.maKhoaHoc}`}
+              className={classes.link}
+              onClick={() => setShow(false)}
+            >
+              <ListItem>
+                <ListItemAvatar>
+                  <Avatar>
+                    <img src={course.hinhAnh} alt={course.tenKhoaHoc} />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={course.tenKhoaHoc} />
+              </ListItem>
+              <Divider />
+            </Link>
+          ))}
+        </List>
+      ) : null}
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    courseList: state.courses.courseList,
+    loading: state.courses.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onfetchCourses: (courseType, group, keyWord) =>
+      dispatch(actions.fetchCourses(courseType, group, keyWord)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Searchbar);

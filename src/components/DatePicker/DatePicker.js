@@ -8,11 +8,14 @@ import {
 } from "@material-ui/pickers";
 
 export default function DatePicker({ pickSelectedDate, value, disabled }) {
+  const handleDateChange = (date) => {
+    pickSelectedDate(date);
+  };
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <KeyboardDatePicker
         fullWidth
-        clearable
         disabled={disabled}
         margin="normal"
         inputVariant="outlined"
@@ -20,7 +23,7 @@ export default function DatePicker({ pickSelectedDate, value, disabled }) {
         label="Date picker dialog"
         format="MM/dd/yyyy"
         value={value}
-        onChange={(date) => pickSelectedDate(date)}
+        onChange={handleDateChange}
         KeyboardButtonProps={{
           "aria-label": "change date",
         }}

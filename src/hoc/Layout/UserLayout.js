@@ -15,11 +15,17 @@ import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 const UserLayout = (props) => {
   const { sideOpen, sideDraw, darkTheme } = props;
   const { onSideOpen, onDrawOpen, onDrawclose } = props;
+  const localTheme = JSON.parse(localStorage.getItem("darkTheme"));
+
+  let isTheme = darkTheme;
+  if (!darkTheme) {
+    isTheme = localTheme;
+  }
 
   const theme = responsiveFontSizes(
     createMuiTheme({
       palette: {
-        type: darkTheme ? "dark" : "light",
+        type: isTheme ? "dark" : "light",
       },
       mixins: {
         toolbar: {

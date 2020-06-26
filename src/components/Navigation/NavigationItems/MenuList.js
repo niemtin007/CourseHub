@@ -8,8 +8,7 @@ import { Link, withRouter } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { AppBar, Toolbar, Tooltip } from "@material-ui/core";
-import { IconButton } from "@material-ui/core";
-import { Box, List } from "@material-ui/core";
+import { Box, List, IconButton } from "@material-ui/core";
 
 import {
   Menu,

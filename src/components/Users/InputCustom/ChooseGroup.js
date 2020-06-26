@@ -5,7 +5,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
 import { connect } from "react-redux";
-import { groupItems } from "../../Courses/InputCustom/SelectList";
+import { groupItems } from "../../Courses/InputCustom/GroupList";
 
 import * as actions from "../../../store/actions";
 

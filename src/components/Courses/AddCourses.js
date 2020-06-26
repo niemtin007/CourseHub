@@ -21,7 +21,7 @@ import * as actions from "../../store/actions";
 import { DropzoneArea } from "material-ui-dropzone";
 import DatePicker from "../DatePicker/DatePicker";
 
-import { groupItems } from "./InputCustom/SelectList";
+import { groupItems } from "./InputCustom/GroupList";
 import FormikField from "./InputCustom/FormikField";
 import FormikSelect from "./InputCustom/FormikSelect";
 
@@ -69,19 +69,32 @@ const AddCourses = (props) => {
     isEdit,
     courseIndex,
     selectedCourse,
+    loading,
     success,
     error,
     tabIndex,
   } = props;
   const { onAddCourse } = props;
 
+  const user = JSON.parse(localStorage.getItem("user"));
   const [selectedImage, setSelectedImage] = useState(null);
+
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const { enqueueSnackbar } = useSnackbar();
 
   const cardStyles = useStyles();
   const shadowStyles = useSoftRiseShadowStyles();
+
+  useEffect(() => {
+    if (selectedCourse && selectedCourse.ngayTao) {
+      const arr = selectedCourse.ngayTao.split("/");
+      const dd = arr[0];
+      const mm = arr[1];
+      const yyyy = arr[2];
+      setSelectedDate(`${yyyy}-${mm}-${dd}`);
+    }
+  }, [selectedCourse]);
 
   useEffect(() => {
     if (error) {
@@ -103,8 +116,6 @@ const AddCourses = (props) => {
     }
   }, [error, success, enqueueSnackbar]);
 
-  const user = JSON.parse(localStorage.getItem("user"));
-
   let initialValues = {
     courseId: "",
     urlName: "",
@@ -120,12 +131,6 @@ const AddCourses = (props) => {
   };
 
   if ((isEdit && selectedCourse) || (preview && selectedCourse)) {
-    const getDate = selectedCourse.ngayTao;
-    const arr = getDate.split("/");
-    const dd = arr[0];
-    const mm = arr[1];
-    const yyyy = arr[2];
-
     initialValues = {
       courseId: selectedCourse.maKhoaHoc,
       urlName: selectedCourse.biDanh,
@@ -135,7 +140,7 @@ const AddCourses = (props) => {
       rate: selectedCourse.danhGia,
       imageUrl: selectedCourse.hinhAnh,
       group: selectedCourse.maNhom,
-      dateCreated: `${yyyy}-${mm}-${dd}`,
+      dateCreated: selectedDate,
       courseCode: selectedCourse.danhMucKhoaHoc.maDanhMucKhoahoc,
       creator: selectedCourse.nguoiTao.taiKhoan,
     };
@@ -155,7 +160,15 @@ const AddCourses = (props) => {
   });
 
   const onSubmit = (values, { setSubmitting, resetForm }) => {
-    onAddCourse(values, selectedImage, isEdit, group, courseType, tabIndex);
+    onAddCourse(
+      values,
+      selectedImage,
+      isEdit,
+      group,
+      courseType,
+      tabIndex,
+      selectedDate
+    );
     resetForm();
     setSubmitting(false);
   };
@@ -245,8 +258,8 @@ const AddCourses = (props) => {
                         />
                         <Box mx={1}>
                           <DatePicker
-                            value={values.dateCreated}
                             disabled={preview}
+                            value={selectedDate}
                             pickSelectedDate={(date) => setSelectedDate(date)}
                           />
                         </Box>
@@ -304,7 +317,7 @@ const AddCourses = (props) => {
                     <Button
                       variant="contained"
                       color="primary"
-                      disabled={!dirty || !isValid}
+                      disabled={loading || !isValid}
                       onClick={submitForm}
                       className={classes.button}
                     >
@@ -328,6 +341,7 @@ const mapStateToProps = (state) => {
     courseIndex: state.courses.courseIndex,
     error: state.coursesManager.error,
     success: state.coursesManager.success,
+    loading: state.coursesManager.loading,
     isEdit: state.coursesManager.isEdit,
     tabIndex: state.coursesManager.tabIndex,
     selectedCourse: state.coursesManager.selectedCourse,
@@ -336,7 +350,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddCourse: (values, selectedImage, isEdit, group, courseType, tabIndex) =>
+    onAddCourse: (
+      values,
+      selectedImage,
+      isEdit,
+      group,
+      courseType,
+      tabIndex,
+      selectedDate
+    ) =>
       dispatch(
         actions.addCourse(
           values,
@@ -344,7 +366,8 @@ const mapDispatchToProps = (dispatch) => {
           isEdit,
           group,
           courseType,
-          tabIndex
+          tabIndex,
+          selectedDate
         )
       ),
   };

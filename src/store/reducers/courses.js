@@ -5,6 +5,7 @@ const initialState = {
   courseIndex: [],
   courseList: [],
   courseDetail: [],
+  userDetail: [],
   loading: false,
 };
 
@@ -26,7 +27,7 @@ const fetchCourseIndexFail = (state, action) => {
 
 // ----------------- Courses List ------------------ //
 const fetchCoursesStart = (state, action) => {
-  return updateObject(state, { loading: true });
+  return updateObject(state, { loading: true, courseList: [] });
 };
 
 const fetchCoursesSuccess = (state, action) => {
@@ -56,6 +57,22 @@ const fetchCourseDetailFail = (state, action) => {
   return updateObject(state, { loading: true });
 };
 
+// ----------------- User Detail ------------------ //
+const fetchUserDetailStart = (state, action) => {
+  return updateObject(state, { loading: true });
+};
+
+const fetchUserDetailSuccess = (state, action) => {
+  return updateObject(state, {
+    loading: false,
+    userDetail: action.userDetail,
+  });
+};
+
+const fetchUserDetailFail = (state, action) => {
+  return updateObject(state, { loading: true });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     // Course Index
@@ -79,6 +96,13 @@ const reducer = (state = initialState, action) => {
       return fetchCourseDetailSuccess(state, action);
     case actionTypes.FETCH_COURSE_DETAIL_FAIL:
       return fetchCourseDetailFail(state, action);
+    // User Detail
+    case actionTypes.FETCH_USER_DETAIL_START:
+      return fetchUserDetailStart(state, action);
+    case actionTypes.FETCH_USER_DETAIL_SUCCESS:
+      return fetchUserDetailSuccess(state, action);
+    case actionTypes.FETCH_USER_DETAIL_FAIL:
+      return fetchUserDetailFail(state, action);
     // Return Defalt
     default:
       return state;

@@ -106,12 +106,13 @@ export const addCourse = (
   isEdit,
   group,
   courseType,
-  tabIndex
+  tabIndex,
+  selectedDate
 ) => {
   return (dispatch) => {
     dispatch(addCourseStart());
     const user = JSON.parse(localStorage.getItem("user"));
-    const date = new Date(values.dateCreated);
+    const date = new Date(selectedDate);
     const dateTimeFormat = new Intl.DateTimeFormat("en", {
       year: "numeric",
       month: "2-digit",
@@ -153,7 +154,8 @@ export const addCourse = (
 
     axios({ url, method, data, headers })
       .then((response) => {
-        console.log("Add/Edit Course: ", response.data);
+        console.log("Post data: ", data);
+        console.log("Add/Edit Response: ", response.data);
         let message = `Thêm khóa học mới ${response.data.tenKhoaHoc} thành công`;
         if (isEdit) {
           message = `Cập nhật khóa học ${response.data.tenKhoaHoc} thành công`;

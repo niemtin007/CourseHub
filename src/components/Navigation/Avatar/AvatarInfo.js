@@ -68,7 +68,11 @@ export const AvatarInfo = React.memo(function ProfileCard() {
             />
           </Badge>
           <h3 className={styles.heading}>{user.taiKhoan}</h3>
-          <span className={styles.subheader}>{user.email}</span>
+          <span className={styles.subheader}>
+            {user.maNhom}
+            <br />
+            {user.email}
+          </span>
         </CardContent>
       ) : null}
       <Divider light />

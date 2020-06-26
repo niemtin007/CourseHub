@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toobarGutters: {
     paddingLeft: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       paddingRight: theme.spacing(2),
     },
   },

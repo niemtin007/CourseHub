@@ -7,13 +7,19 @@ import * as actions from "../../store/actions";
 
 const DarkThemeSwitch = ({ darkTheme, onDarkTheme }) => {
   const switchStyles = useN01SwitchStyles();
+  const localTheme = JSON.parse(localStorage.getItem("darkTheme"));
+
+  let isTheme = darkTheme;
+  if (!darkTheme) {
+    isTheme = localTheme;
+  }
 
   return (
     <div>
       <Tooltip title="Dark Theme">
         <Switch
           classes={switchStyles}
-          checked={darkTheme}
+          checked={isTheme}
           onChange={(e) => onDarkTheme(e.target.checked)}
         />
       </Tooltip>

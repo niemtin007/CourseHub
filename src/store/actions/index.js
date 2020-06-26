@@ -6,7 +6,12 @@ export {
   clearMessage,
 } from "./ui";
 
-export { fetchCourseIndex, fetchCourses, fetchCourseDetail } from "./courses";
+export {
+  fetchCourseIndex,
+  fetchCourses,
+  fetchCourseDetail,
+  fetchUserDetail,
+} from "./courses";
 
 export { auth, logout, authCheckState, authStart, chooseGroup } from "./auth";
 

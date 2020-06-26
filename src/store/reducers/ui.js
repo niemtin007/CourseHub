@@ -4,7 +4,7 @@ import { updateObject } from "../utility";
 const initialState = {
   sideOpen: false,
   sideDraw: false,
-  darkTheme: false,
+  darkTheme: null,
 };
 
 const openAnchor = (state, action) => {
@@ -20,6 +20,7 @@ const drawClose = (state, action) => {
 };
 
 const darkTheme = (state, action) => {
+  localStorage.setItem("darkTheme", JSON.stringify(action.darkTheme));
   return updateObject(state, { darkTheme: action.darkTheme });
 };
 
