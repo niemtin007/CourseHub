@@ -17,7 +17,7 @@ export default function DataLength({ items, type }) {
         icon={<FaceIcon />}
         label={`${items} ${type} was found!`}
         clickable
-        color="primary"
+        color="default"
         onDelete={handleDelete}
         deleteIcon={<DoneIcon />}
         variant="outlined"

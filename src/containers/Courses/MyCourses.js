@@ -22,11 +22,11 @@ import FolderIcon from "@material-ui/icons/Folder";
 import BlockIcon from "@material-ui/icons/Block";
 
 import Spinner from "../../components/UI/Spinner/Spinner";
+import DataLength from "../../components/DataDisplay/DataLength";
 
 import cx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSoftRiseShadowStyles } from "@mui-treasury/styles/shadow/softRise";
-import DataLength from "../../components/DataDisplay/DataLength";
 
 const useStyles = makeStyles(() => ({
   root: {

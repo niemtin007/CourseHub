@@ -1,32 +1,21 @@
 import React, { useEffect, Fragment } from "react";
+
+import * as actions from "../../store/actions";
 import { connect } from "react-redux";
 import { useSnackbar } from "notistack";
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import {
-  Badge,
-  IconButton,
-  Fab,
-  Box,
-  TextField,
-  Button,
-  Grid,
-  Tooltip,
-} from "@material-ui/core";
+
+import { List, ListItem, ListItemSecondaryAction } from "@material-ui/core";
+import { ListItemText, ListItemAvatar, Avatar } from "@material-ui/core";
+import { Box, TextField, Button, Grid } from "@material-ui/core";
+import { Badge, IconButton, Fab, Tooltip } from "@material-ui/core";
+
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import Spinner from "../UI/Spinner/Spinner";
-
-import ChooseGroup from "./InputCustom/ChooseGroup";
-
-import * as actions from "../../store/actions";
 import DataLength from "../DataDisplay/DataLength";
+import ChooseGroup from "./InputCustom/ChooseGroup";
 
 const useStyles = makeStyles((theme) => ({
   userItems: {
@@ -135,7 +124,11 @@ function UserList(props) {
             >
               <Avatar
                 alt={`Avatar n°${index + 1}`}
-                src={`https://i.pravatar.cc/150?img=${index + 1}`}
+                src={
+                  index > 69
+                    ? null
+                    : `https://i.pravatar.cc/150?img=${index + 1}`
+                }
               />
             </Badge>
           </ListItemAvatar>
