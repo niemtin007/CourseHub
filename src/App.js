@@ -75,7 +75,6 @@ const App = ({ onTryAutoSignup }) => {
         {/* Without Layout */}
         <Route path="/sign-in" component={Auth} />
         <Route path="/sign-up" component={Auth} />
-
         {/* Page Not Found */}
         <Route path="" component={PageNotFound} />
       </Switch>

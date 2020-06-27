@@ -1,13 +1,7 @@
 import React from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-
-import { connect } from "react-redux";
-import { InputLabel } from "@material-ui/core";
-
-// import * as actions from "../../../store/actions";
+import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -35,27 +29,10 @@ const ChooseGroup = (props) => {
         <MenuItem value="date">Created Date</MenuItem>
         <MenuItem value="a-z">Title: A-to-Z</MenuItem>
         <MenuItem value="z-a">Title: Z-to-A</MenuItem>
+        <MenuItem value="id">Course ID</MenuItem>
       </Select>
     </FormControl>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    // courseIndex: state.courses.courseIndex,
-    // courseType: state.coursesManager.courseType,
-    // group: state.auth.group,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    // onChooseGroup: (group) => dispatch(actions.chooseGroup(group)),
-    // onChooseCourseType: (courseType) =>
-    //   dispatch(actions.chooseCourseType(courseType)),
-    // onFetchCourseList: (keyWord, group, courseType) =>
-    //   dispatch(actions.fetchCoursesList(keyWord, group, courseType)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChooseGroup);
+export default ChooseGroup;

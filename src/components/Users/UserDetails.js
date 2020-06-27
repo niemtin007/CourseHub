@@ -31,7 +31,7 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { AddUsers } from "./AddUsers";
+import AddUsers from "./AddUsers";
 import Spinner from "../UI/Spinner/Spinner";
 
 const useStyles = makeStyles(({ palette, typography }) => ({
@@ -144,7 +144,10 @@ const UserDetails = (props) => {
                   <FolderIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary={course.tenKhoaHoc} />
+              <ListItemText
+                primary={course.tenKhoaHoc}
+                style={{ paddingRight: 60 }}
+              />
               <ListItemSecondaryAction>
                 <IconButton
                   edge="end"
@@ -153,7 +156,7 @@ const UserDetails = (props) => {
                     onApproveCoursePending(course.maKhoaHoc, selectedUser)
                   }
                 >
-                  <Tooltip title="Approve" placement="right">
+                  <Tooltip title="Approve" placement="left">
                     <ThumbUpAltIcon />
                   </Tooltip>
                 </IconButton>

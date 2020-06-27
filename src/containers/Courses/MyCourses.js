@@ -12,6 +12,7 @@ import {
   ListItem,
   ListItemSecondaryAction,
   Card,
+  Typography,
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
@@ -25,6 +26,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import cx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSoftRiseShadowStyles } from "@mui-treasury/styles/shadow/softRise";
+import DataLength from "../../components/DataDisplay/DataLength";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -50,6 +52,20 @@ const useStyles = makeStyles(() => ({
     textDecoration: "none",
     textTransform: "none",
     color: "inherit",
+  },
+  title: {
+    display: "inline",
+    fontWeight: 700,
+    background: "linear-gradient(120deg, #2980b9, #8e44ad)",
+    "-webkit-background-clip": "text",
+    color: "transparent",
+    transition: "0.5s",
+
+    "&:hover": {
+      background: "linear-gradient(right, #2980b9, #8e44ad)",
+      color: "transparent",
+      "-webkit-background-clip": "text",
+    },
   },
 }));
 
@@ -145,6 +161,21 @@ const Courses = (props) => {
       className={cardStyles.background}
     >
       <Card className={cx(cardStyles.root, shadowStyles.root)}>
+        <Box display="flex" justifyContent="center" mt={3}>
+          <Typography variant="h3" className={cardStyles.title}>
+            My Courses
+          </Typography>
+        </Box>
+
+        {isMe && userDetail && userDetail.chiTietKhoaHocGhiDanh ? (
+          <Box display="flex" justifyContent="center" mt={3}>
+            <DataLength
+              items={userDetail.chiTietKhoaHocGhiDanh.length}
+              type={"courses"}
+            />
+          </Box>
+        ) : null}
+
         <Grid container spacing={2} justify="center">
           {courseListRender}
         </Grid>

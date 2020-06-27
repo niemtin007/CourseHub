@@ -9,12 +9,16 @@ import FilterButton from "../../components/CourseList/FilterButton/FilterButton"
 import GroupButton from "../../components/CourseList/GroupButton/GroupButton";
 import CourseCardItem from "../../components/CourseList/CourseCard/CourseCard";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import DataLength from "../../components/DataDisplay/DataLength";
 
 const Courses = (props) => {
-  const { courseList, loading } = props;
+  let { courseList } = props;
+
+  const { loading } = props;
   const { onfetchCourses } = props;
+
   const [courseType, setCourseType] = useState("all");
-  const [sortBy, setSortBy] = useState("date");
+  const [sortBy, setSortBy] = useState("id");
   const [group, setGroup] = useState("GP08");
   const [keyWord, setKeyWord] = useState(null);
 
@@ -28,6 +32,36 @@ const Courses = (props) => {
       setKeyWord(word);
     }, 1500);
   };
+
+  switch (sortBy) {
+    case "date":
+      courseList = courseList.slice(0);
+      courseList.sort(function (a, b) {
+        var x = parseInt(a.ngayTao.split("/"));
+        var y = parseInt(b.ngayTao.split("/"));
+        return x - y;
+      });
+      break;
+    case "a-z":
+      courseList = courseList.slice(0);
+      courseList.sort(function (a, b) {
+        var x = a.tenKhoaHoc.toLowerCase();
+        var y = b.tenKhoaHoc.toLowerCase();
+        return x < y ? -1 : x > y ? 1 : 0;
+      });
+      break;
+    case "z-a":
+      courseList = courseList.slice(0);
+      courseList.sort(function (a, b) {
+        var y = a.tenKhoaHoc.toLowerCase();
+        var x = b.tenKhoaHoc.toLowerCase();
+        return x < y ? -1 : x > y ? 1 : 0;
+      });
+      break;
+
+    default:
+      break;
+  }
 
   let courseListRender = <Spinner />;
   if (!loading && courseList.length > 0) {
@@ -70,6 +104,12 @@ const Courses = (props) => {
           <SearchBarCustom onChangeKeyWord={handleChangeKeyWord} />
         </Box>
       </Box>
+
+      {courseList && courseList.length ? (
+        <Box display="flex" justifyContent="center" m={3}>
+          <DataLength items={courseList.length} type={"courses"} />
+        </Box>
+      ) : null}
 
       <Grid container spacing={2} justify="center">
         {courseListRender}

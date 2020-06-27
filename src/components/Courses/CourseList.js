@@ -1,16 +1,19 @@
 import React, { useEffect, Fragment } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import { Fab, Box, TextField, Grid, Tooltip } from "@material-ui/core";
-import * as actions from "../../store/actions";
+
 import { connect } from "react-redux";
+import * as actions from "../../store/actions";
+
+import { makeStyles } from "@material-ui/core/styles";
+
+import { List, ListItem, Tooltip } from "@material-ui/core";
+import { Fab, Box, TextField, Grid } from "@material-ui/core";
 
 import AddIcon from "@material-ui/icons/Add";
 
 import Spinner from "../UI/Spinner/Spinner";
 import CourseCardItem from "./CourseCardItem";
 import ChooseGroup from "./InputCustom/ChooseGroup";
+import DataLength from "../DataDisplay/DataLength";
 
 const useStyles = makeStyles((theme) => ({
   courseItems: {
@@ -78,6 +81,10 @@ function CourseList(props) {
                 <AddIcon />
               </Tooltip>
             </Fab>
+
+            {courseList && courseList.length ? (
+              <DataLength items={courseList.length} type={"courses"} />
+            ) : null}
 
             <ChooseGroup />
           </Grid>

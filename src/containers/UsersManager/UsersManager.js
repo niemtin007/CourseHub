@@ -10,10 +10,10 @@ import UserDetails from "../../components/Users/UserDetails";
 
 const useStyles = makeStyles((theme) => ({
   userList: {
-    flex: 1,
+    flex: 2,
   },
   detail: {
-    flex: 2,
+    flex: 3,
     minWidth: 350,
     overflowY: "auto",
     background: "linear-gradient(120deg, #2980b9, #8e44ad)",

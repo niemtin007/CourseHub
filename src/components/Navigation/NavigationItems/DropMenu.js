@@ -71,7 +71,7 @@ const DropMenu = (props) => {
           Log Out
         </Button>
       </Box>
-      <Box m={matchMD ? 0 : 1} ml={matchMD ? 1 : 0}>
+      <Box my={matchMD ? 0 : 1} ml={matchMD ? 1 : 0}>
         <Button
           disableElevation
           color="default"

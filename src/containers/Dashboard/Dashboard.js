@@ -81,6 +81,15 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     transform: "translateZ(0)",
   },
+  titleNumber: {
+    lineHeight: "85%",
+    "@media (max-width: 1274px)": {
+      lineHeight: "100%",
+    },
+    "@media (max-width: 600px)": {
+      fontSize: "4rem",
+    },
+  },
 }));
 
 const slideItems = [
@@ -148,7 +157,7 @@ const featureList = [
     icon: <LiveTv />,
     title: "online courses",
     subtitle: "Enjoy a variety of fresh topics",
-    count: <CountUp end={100} duration={6} style={{ marginRight: 4 }} />,
+    count: <CountUp end={1000} duration={6} style={{ marginRight: 4 }} />,
   },
   {
     icon: <Bookmark />,
@@ -163,6 +172,7 @@ const featureList = [
     count: null,
   },
 ];
+
 const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
   return (
     <div>
@@ -173,7 +183,7 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
         onStart={() => setHandleOpen({ open: false })}
         autoplay={false}
         hideArrows={false}
-        mobile={true}
+        mobile={isMobile}
       >
         {slideItems.map((item) => (
           <Slide
@@ -277,7 +287,7 @@ function Dashboard({ darkTheme }) {
             <strong>The world's most useless selection of courses</strong>
           </Typography>
           <Typography variant="subtitle1" gutterBottom>
-            Choose from 100 online video courses with new additions published
+            Choose from 1000 online video courses with new additions published
             every decade
           </Typography>
         </Box>
@@ -358,7 +368,7 @@ function Dashboard({ darkTheme }) {
         >
           <Box alignSelf="flex-start" maxWidth={500} m={5}>
             <Box display="flex">
-              <Typography variant="h1" style={{ lineHeight: "85%" }}>
+              <Typography variant="h1" className={classes.titleNumber}>
                 1
               </Typography>
               <Box ml={1} display="flex" flexDirection="column">
@@ -375,7 +385,7 @@ function Dashboard({ darkTheme }) {
 
           <Box alignSelf="flex-end" maxWidth={500} m={5}>
             <Box display="flex">
-              <Typography variant="h1" style={{ lineHeight: "85%" }}>
+              <Typography variant="h1" className={classes.titleNumber}>
                 2
               </Typography>
               <Box ml={1} display="flex" flexDirection="column">
@@ -393,7 +403,7 @@ function Dashboard({ darkTheme }) {
 
           <Box alignSelf="flex-start" maxWidth={500} m={5}>
             <Box display="flex">
-              <Typography variant="h1" style={{ lineHeight: "85%" }}>
+              <Typography variant="h1" className={classes.titleNumber}>
                 3
               </Typography>
               <Box ml={1} display="flex" flexDirection="column">

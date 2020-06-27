@@ -1,12 +1,13 @@
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
-import { useSnackbar } from "notistack";
 import { Formik, Form, Field, useField } from "formik";
 import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Box, CssBaseline, FormGroup } from "@material-ui/core";
 import { NativeSelect } from "@material-ui/core";
+
+import { useSnackbar } from "notistack";
 
 import * as Yup from "yup";
 import * as actions from "../../store/actions";

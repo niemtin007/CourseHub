@@ -113,7 +113,7 @@ const MenuList = (props) => {
             color={"#8e44ad"}
             startIcon={<InsertDriveFile className={classes.navIcon} />}
             label={"Courses Manage"}
-            amount={"5"}
+            amount={100}
             {...commonProps("/courses-management")}
             dotOnCollapsed={true}
           />
@@ -132,7 +132,7 @@ const MenuList = (props) => {
             color={"#e37400"}
             startIcon={<People className={classes.navIcon} />}
             label={"Students Manage"}
-            amount={"20"}
+            amount={30}
             {...commonProps("/users-management")}
             dotOnCollapsed={true}
           />

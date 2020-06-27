@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 
+import { SnackbarProvider } from "notistack";
 import { CssBaseline } from "@material-ui/core";
 import { makeStyles, responsiveFontSizes } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
@@ -53,23 +54,25 @@ const UserLayout = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <CssBaseline />
-        <Appbar
-          openToggleClicked={onSideOpen}
-          drawerToggleClicked={onDrawOpen}
-        />
-        <SideDrawer
-          openSidebar={sideOpen}
-          drawSidebar={sideDraw}
-          open={onDrawOpen}
-          close={onDrawclose}
-        />
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          {props.children}
-        </main>
-      </div>
+      <SnackbarProvider preventDuplicate maxSnack={3}>
+        <div className={classes.root}>
+          <CssBaseline />
+          <Appbar
+            openToggleClicked={onSideOpen}
+            drawerToggleClicked={onDrawOpen}
+          />
+          <SideDrawer
+            openSidebar={sideOpen}
+            drawSidebar={sideDraw}
+            open={onDrawOpen}
+            close={onDrawclose}
+          />
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            {props.children}
+          </main>
+        </div>
+      </SnackbarProvider>
     </ThemeProvider>
   );
 };

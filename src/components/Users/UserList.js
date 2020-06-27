@@ -26,6 +26,7 @@ import Spinner from "../UI/Spinner/Spinner";
 import ChooseGroup from "./InputCustom/ChooseGroup";
 
 import * as actions from "../../store/actions";
+import DataLength from "../DataDisplay/DataLength";
 
 const useStyles = makeStyles((theme) => ({
   userItems: {
@@ -185,6 +186,10 @@ function UserList(props) {
                 <AddIcon />
               </Tooltip>
             </Fab>
+
+            {userList && userList.length ? (
+              <DataLength items={userList.length} type={"users"} />
+            ) : null}
 
             <ChooseGroup />
           </Grid>
