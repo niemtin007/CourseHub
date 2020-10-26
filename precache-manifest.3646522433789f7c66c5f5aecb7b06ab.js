@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "68c6e1966ac09132524cf49b63c1d3fa",
+    "revision": "351cdb65739b8eb0b6b9fe3e6b16091c",
     "url": "/CourseHub/index.html"
   },
   {
-    "revision": "3311e371f81142336e99",
+    "revision": "10ebbbceecea846c1a9f",
     "url": "/CourseHub/static/css/main.7e5ab5ed.chunk.css"
   },
   {
-    "revision": "d864dc2622094b14783f",
-    "url": "/CourseHub/static/js/2.e0a62d29.chunk.js"
+    "revision": "e13b28ea5263bce961f8",
+    "url": "/CourseHub/static/js/2.3d2fb4c5.chunk.js"
   },
   {
     "revision": "7f5c15c882be7428c1c94cd76bcb513a",
-    "url": "/CourseHub/static/js/2.e0a62d29.chunk.js.LICENSE.txt"
+    "url": "/CourseHub/static/js/2.3d2fb4c5.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "3311e371f81142336e99",
-    "url": "/CourseHub/static/js/main.1157806c.chunk.js"
+    "revision": "10ebbbceecea846c1a9f",
+    "url": "/CourseHub/static/js/main.933005f7.chunk.js"
   },
   {
-    "revision": "eb7767d663522d68f44e",
-    "url": "/CourseHub/static/js/runtime-main.98ecd6f7.js"
+    "revision": "d4364f07e243460296c0",
+    "url": "/CourseHub/static/js/runtime-main.086083e5.js"
   },
   {
     "revision": "6ea974ac889ccb72c01fa5ac8d33ede3",
