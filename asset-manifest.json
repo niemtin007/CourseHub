@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/CourseHub/static/css/main.7e5ab5ed.chunk.css",
-    "main.js": "/CourseHub/static/js/main.afb0a70e.chunk.js",
-    "main.js.map": "/CourseHub/static/js/main.afb0a70e.chunk.js.map",
+    "main.js": "/CourseHub/static/js/main.432a7123.chunk.js",
+    "main.js.map": "/CourseHub/static/js/main.432a7123.chunk.js.map",
     "runtime-main.js": "/CourseHub/static/js/runtime-main.086083e5.js",
     "runtime-main.js.map": "/CourseHub/static/js/runtime-main.086083e5.js.map",
-    "static/js/2.3d2fb4c5.chunk.js": "/CourseHub/static/js/2.3d2fb4c5.chunk.js",
-    "static/js/2.3d2fb4c5.chunk.js.map": "/CourseHub/static/js/2.3d2fb4c5.chunk.js.map",
+    "static/js/2.913e3e7e.chunk.js": "/CourseHub/static/js/2.913e3e7e.chunk.js",
+    "static/js/2.913e3e7e.chunk.js.map": "/CourseHub/static/js/2.913e3e7e.chunk.js.map",
     "index.html": "/CourseHub/index.html",
-    "precache-manifest.2a3ab6b80cd126cbf11db0d81a186cb8.js": "/CourseHub/precache-manifest.2a3ab6b80cd126cbf11db0d81a186cb8.js",
+    "precache-manifest.39433f713f482e2faf7b4c084ce6732e.js": "/CourseHub/precache-manifest.39433f713f482e2faf7b4c084ce6732e.js",
     "service-worker.js": "/CourseHub/service-worker.js",
     "static/css/main.7e5ab5ed.chunk.css.map": "/CourseHub/static/css/main.7e5ab5ed.chunk.css.map",
-    "static/js/2.3d2fb4c5.chunk.js.LICENSE.txt": "/CourseHub/static/js/2.3d2fb4c5.chunk.js.LICENSE.txt",
+    "static/js/2.913e3e7e.chunk.js.LICENSE.txt": "/CourseHub/static/js/2.913e3e7e.chunk.js.LICENSE.txt",
     "static/media/1.png": "/CourseHub/static/media/1.6ea974ac.png",
     "static/media/2.png": "/CourseHub/static/media/2.06be9420.png",
     "static/media/3.png": "/CourseHub/static/media/3.e04b132b.png",
@@ -34,8 +34,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.086083e5.js",
-    "static/js/2.3d2fb4c5.chunk.js",
+    "static/js/2.913e3e7e.chunk.js",
     "static/css/main.7e5ab5ed.chunk.css",
-    "static/js/main.afb0a70e.chunk.js"
+    "static/js/main.432a7123.chunk.js"
   ]
 }
