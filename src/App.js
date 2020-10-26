@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "./store/actions";
 
@@ -55,54 +55,32 @@ const App = ({ onTryAutoSignup }) => {
   }, [onTryAutoSignup]);
 
   return (
-    <Fragment>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Switch>
         {/* With Layout */}
-        <RouteUser
-          path={process.env.PUBLIC_URL + "/"}
-          exact
-          Component={Dashboard}
-        />
-        <RouteUser
-          path={process.env.PUBLIC_URL + "/about"}
-          exact
-          Component={About}
-        />
-        <RouteUser
-          path={process.env.PUBLIC_URL + "/courses"}
-          exact
-          Component={Courses}
-        />
-        <RouteUser
-          path={process.env.PUBLIC_URL + "/my-courses"}
-          exact
-          Component={MyCourses}
-        />
-        <RouteUser
-          path={process.env.PUBLIC_URL + "/courses/:id"}
-          Component={CourseDetail}
-        />
-        <RouteUser
-          path={process.env.PUBLIC_URL + "/logout"}
-          Component={Logout}
-        />
+        <RouteUser path="/" exact Component={Dashboard} />
+        <RouteUser path="/about" exact Component={About} />
+        <RouteUser path="/courses" exact Component={Courses} />
+        <RouteUser path="/my-courses" exact Component={MyCourses} />
+        <RouteUser path="/courses/:id" Component={CourseDetail} />
+        <RouteUser path="/logout" Component={Logout} />
         <RouteAdmin
-          path={process.env.PUBLIC_URL + "/users-management"}
+          path="/users-management"
           Component={UsersManager}
           isAdmin={isAdmin}
         />
         <RouteAdmin
-          path={process.env.PUBLIC_URL + "/courses-management"}
+          path="/courses-management"
           Component={CoursesManager}
           isAdmin={isAdmin}
         />
         {/* Without Layout */}
-        <Route path="CourseHub/sign-in" component={Auth} />
-        <Route path="CourseHub/sign-up" component={Auth} />
+        <Route path="/sign-in" component={Auth} />
+        <Route path="/sign-up" component={Auth} />
         {/* Page Not Found */}
         <Route path="" component={PageNotFound} />
       </Switch>
-    </Fragment>
+    </BrowserRouter>
   );
 };
 
