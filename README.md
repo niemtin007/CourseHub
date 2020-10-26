@@ -1,11 +1,10 @@
-
-
 ## Project Status: Work-In-Process
+
 This is an E-learning Web App was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and other libraries.
 The UI build base on [Material-UI](https://material-ui.com) along with the associated library ecosystem
 
-API: http://elearning0706.cybersoft.edu.vn/swagger/index.html
-
+API: https://elearning0706.cybersoft.edu.vn/swagger/index.html
+Live Demo: https://niemtin007.github.io/CourseHub/
 
 ## Available Scripts
 
