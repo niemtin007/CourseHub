@@ -58,19 +58,41 @@ const App = ({ onTryAutoSignup }) => {
     <Fragment>
       <Switch>
         {/* With Layout */}
-        <RouteUser path="CourseHub/" exact Component={Dashboard} />
-        <RouteUser path="CourseHub/about" exact Component={About} />
-        <RouteUser path="CourseHub/courses" exact Component={Courses} />
-        <RouteUser path="CourseHub/my-courses" exact Component={MyCourses} />
-        <RouteUser path="CourseHub/courses/:id" Component={CourseDetail} />
-        <RouteUser path="CourseHub/logout" Component={Logout} />
+        <RouteUser
+          path={process.env.PUBLIC_URL + "/"}
+          exact
+          Component={Dashboard}
+        />
+        <RouteUser
+          path={process.env.PUBLIC_URL + "/about"}
+          exact
+          Component={About}
+        />
+        <RouteUser
+          path={process.env.PUBLIC_URL + "/courses"}
+          exact
+          Component={Courses}
+        />
+        <RouteUser
+          path={process.env.PUBLIC_URL + "/my-courses"}
+          exact
+          Component={MyCourses}
+        />
+        <RouteUser
+          path={process.env.PUBLIC_URL + "/courses/:id"}
+          Component={CourseDetail}
+        />
+        <RouteUser
+          path={process.env.PUBLIC_URL + "/logout"}
+          Component={Logout}
+        />
         <RouteAdmin
-          path="CourseHub/users-management"
+          path={process.env.PUBLIC_URL + "/users-management"}
           Component={UsersManager}
           isAdmin={isAdmin}
         />
         <RouteAdmin
-          path="CourseHub/courses-management"
+          path={process.env.PUBLIC_URL + "/courses-management"}
           Component={CoursesManager}
           isAdmin={isAdmin}
         />
