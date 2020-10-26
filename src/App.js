@@ -58,25 +58,25 @@ const App = ({ onTryAutoSignup }) => {
     <Fragment>
       <Switch>
         {/* With Layout */}
-        <RouteUser path="/" exact Component={Dashboard} />
-        <RouteUser path="/about" exact Component={About} />
-        <RouteUser path="/courses" exact Component={Courses} />
-        <RouteUser path="/my-courses" exact Component={MyCourses} />
-        <RouteUser path="/courses/:id" Component={CourseDetail} />
-        <RouteUser path="/logout" Component={Logout} />
+        <RouteUser path="CourseHub/" exact Component={Dashboard} />
+        <RouteUser path="CourseHub/about" exact Component={About} />
+        <RouteUser path="CourseHub/courses" exact Component={Courses} />
+        <RouteUser path="CourseHub/my-courses" exact Component={MyCourses} />
+        <RouteUser path="CourseHub/courses/:id" Component={CourseDetail} />
+        <RouteUser path="CourseHub/logout" Component={Logout} />
         <RouteAdmin
-          path="/users-management"
+          path="CourseHub/users-management"
           Component={UsersManager}
           isAdmin={isAdmin}
         />
         <RouteAdmin
-          path="/courses-management"
+          path="CourseHub/courses-management"
           Component={CoursesManager}
           isAdmin={isAdmin}
         />
         {/* Without Layout */}
-        <Route path="/sign-in" component={Auth} />
-        <Route path="/sign-up" component={Auth} />
+        <Route path="CourseHub/sign-in" component={Auth} />
+        <Route path="CourseHub/sign-up" component={Auth} />
         {/* Page Not Found */}
         <Route path="" component={PageNotFound} />
       </Switch>
