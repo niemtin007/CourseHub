@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions";
 
@@ -79,17 +79,18 @@ const Searchbar = (props) => {
   const { onfetchCourses } = props;
   const [keyWord, setKeyWord] = useState(null);
   const [show, setShow] = useState(false);
+  const typingTimeoutRef = useRef(null);
+
+  if (typingTimeoutRef.current) {
+    clearTimeout(typingTimeoutRef.current);
+  };
 
   useEffect(() => {
-    onfetchCourses("all", "GP08", keyWord);
-  }, [onfetchCourses, keyWord]);
-
-  const handleKeyWord = (value) => {
-    setTimeout(() => {
-      setKeyWord(value);
+    typingTimeoutRef.current = setTimeout(() => {
+      onfetchCourses("all", "GP08", keyWord);
       setShow(true);
-    }, 1500);
-  };
+    }, 500);
+  }, [onfetchCourses, keyWord]);
 
   return (
     <div className={classes.search}>
@@ -104,7 +105,7 @@ const Searchbar = (props) => {
           input: classes.inputInput,
         }}
         inputProps={{ "aria-label": "search" }}
-        onChange={(event) => handleKeyWord(event.target.value)}
+        onChange={(event) => setKeyWord(event.target.value)}
       />
       {show && keyWord && courseList && courseList.length > 0 ? (
         <List className={classes.searchResult}>
