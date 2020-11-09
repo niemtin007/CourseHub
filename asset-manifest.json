@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/CourseHub/static/css/main.7e5ab5ed.chunk.css",
-    "main.js": "/CourseHub/static/js/main.717cd589.chunk.js",
-    "main.js.map": "/CourseHub/static/js/main.717cd589.chunk.js.map",
+    "main.js": "/CourseHub/static/js/main.1eae7b9a.chunk.js",
+    "main.js.map": "/CourseHub/static/js/main.1eae7b9a.chunk.js.map",
     "runtime-main.js": "/CourseHub/static/js/runtime-main.086083e5.js",
     "runtime-main.js.map": "/CourseHub/static/js/runtime-main.086083e5.js.map",
     "static/js/2.913e3e7e.chunk.js": "/CourseHub/static/js/2.913e3e7e.chunk.js",
     "static/js/2.913e3e7e.chunk.js.map": "/CourseHub/static/js/2.913e3e7e.chunk.js.map",
     "index.html": "/CourseHub/index.html",
-    "precache-manifest.91e99a91b6a0a6c461b78a85b765890a.js": "/CourseHub/precache-manifest.91e99a91b6a0a6c461b78a85b765890a.js",
+    "precache-manifest.6ef0de2f5d8689f014bebdeeafca6bbd.js": "/CourseHub/precache-manifest.6ef0de2f5d8689f014bebdeeafca6bbd.js",
     "service-worker.js": "/CourseHub/service-worker.js",
     "static/css/main.7e5ab5ed.chunk.css.map": "/CourseHub/static/css/main.7e5ab5ed.chunk.css.map",
     "static/js/2.913e3e7e.chunk.js.LICENSE.txt": "/CourseHub/static/js/2.913e3e7e.chunk.js.LICENSE.txt",
@@ -36,6 +36,6 @@
     "static/js/runtime-main.086083e5.js",
     "static/js/2.913e3e7e.chunk.js",
     "static/css/main.7e5ab5ed.chunk.css",
-    "static/js/main.717cd589.chunk.js"
+    "static/js/main.1eae7b9a.chunk.js"
   ]
 }
